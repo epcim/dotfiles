@@ -1,0 +1,6 @@
+#!/bin/sh
+
+#TODO: Find true link dest -> while `test -L ${SRCD}`;do echo SRCD="$SRCD";SRCD=`readlink ${SRCD}`;done
+#TODO: Option to perform only if end file is executable, otherwise report
+
+for i in `find $1 -type l` ; do DST=`ls -l $i|sed -e 's/.*-> //'`; if [ `echo $DST| grep '/' 2>/dev/null |wc -l` -gt 0 ];then rm -f $i ; echo -e '#!/bin/sh '"\n$DST" > $i; chmod u+x $i ; else echo LOCAL $DST; fi ;done

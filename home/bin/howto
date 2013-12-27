@@ -1,0 +1,44 @@
+#!/bin/zsh
+# Search for howto chunk of files under $HOWTO directory. Print, Edit or execute if (shell script).
+
+#SAVEIFS=$IFS
+#IFS=$(echo -en "\n\b")
+
+test -z $HOWTO && HOWTO="$HOME/hg2g/howto"
+export $HOWTO; test -d $HOWTO || mkdir -p $HOWTO
+
+autoload -U colors
+colors
+
+FOUND=`find $HOWTO/ -type f | grep "$1" --color`
+
+
+#PRINT
+if [ ! -z $FOUND ]; then
+	echo ""
+	#print found
+	echo $FOUND | sed -e 's/^/vim /' -e "s:$HOWTO:\$HOWTO:" |grep --color $1
+	echo ""
+	#print found executable
+	for i in `echo $FOUND|xargs`;do 
+		[[ -x $i ]] && echo $i | sed -e "s:$HOWTO:\$HOWTO:" | grep --color $1
+	done
+	echo ""
+fi
+
+
+#OPEN OR EXECUTE
+if [ `echo $FOUND | wc -l` -gt 1 ]; then
+	#more than 1 file
+else
+	#just one or 0
+	if [ -e "$FOUND" ]; then
+		#execute ?
+		[[ -x $FOUND ]] && $FOUND $2
+	fi
+	# open or create new doc
+	test -e "$FOUND" && vim ${FOUND} || vim $HOWTO/$1.howto
+fi
+
+
+#IFS=$SAVEIFS

@@ -1,0 +1,29 @@
+#!/bin/bash
+# Simple file based report/note database sercher/indexer.
+# Search for all *.report (optionally .rst, .rest, .md) files in subdirs and list them.
+
+# search
+if [ "$1" == "" ] ; then
+	find . -name '*.report*' -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
+fi;
+
+# create new
+if [ "$1" != "" ] ; then
+    SUFFIX=`basename $1|sed -e 's/.*\.\([a-zA-Z0-9]*)/\1/'`
+    test -z $SUFFIX || SUFFIX=rst
+
+    ## Use template if exist
+    case $SUFFIX in
+        rst | RST)
+             if [ ! -e "$1.rst.report" ] ; then
+                    cp -i ~/hg2g/tools/rst2odt/template-report.rst $1.rst.report
+             fi;
+        ;;
+        md | MD)
+                cp -i ~/hg2g/tools/report/template.md $NAME.$SUFFIX.report
+        ;;
+    esac
+
+    # Open
+	vim $NAME.$SUFFIX.report
+fi;

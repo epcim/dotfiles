@@ -1,0 +1,20 @@
+#!/bin/zsh
+
+P_LIMIT=`ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'`
+P_LIMIT_N=`echo $P_LIMIT + 700|bc`
+
+
+#echo $P_LIMIT
+#echo $P_LIMIT_N
+
+ulimit -u $P_LIMIT_N
+~/bin/.ping-scan $@ | sed -e 's/.*\ \(.*\)\:.*/\1/' | sort -u
+ulimit -u $P_LIMIT
+
+#if [ `grep fork $TEMP|wc -l` -ge 2 ] ; then
+#	ulimit -u `echo \`ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'\` + 255 |bc`
+#	echo ulimit set to: `ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'`
+#fi;
+#cat $TEMP
+
+
