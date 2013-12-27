@@ -29,8 +29,6 @@ theme_path = "/usr/share/awesome/themes/zenburn/theme.lua"
 -- Uncommment this for a lighter theme
 -- theme_path = "/usr/share/awesome/themes/sky/theme"
 
--- Actually load theme
-beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
 browser = "firefox"
@@ -40,14 +38,14 @@ editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 wibox_pos = "top"
 
+-- Actually load theme
+beautiful.init(theme_path)
 
 --#powerline
 --repository_root = "" #https://github.com/Lokaltog/powerline
 --package.path = package.path .. ';{repository_root}/powerline/bindings/awesome/?.lua'
 --require('powerline')
 --right_layout:add(powerline_widget)
-
-
 
 if os.hostname == "bluepanic" then
 	mail = "ibm-notes8"
@@ -84,6 +82,24 @@ layouts =
 
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false
+
+
+function fileExists(n)
+    local f=io.open(n)
+    io.close(f)
+    return f==nil
+end
+
+
+-- ----------------------------------
+-- Load rc.local.lua
+if fileExists(awful.util.getdir("config") .. "/" .. "rc.local.lua")) then
+    dofile(awful.util.getdir("config") .. "/" .. "rc.local.lua")
+end
+-- ----------------------------------
+
+
+
 
 -- terminal,2,3,web,mail,workspace,media,7,office
 -- Shifty configured tags.
