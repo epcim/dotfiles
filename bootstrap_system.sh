@@ -1,5 +1,10 @@
 #!/bin/bash -ex
 
-#TODO:
-# SsH keys
-# fabfric folder, install apps etc
+#TODO: bootstrap SYSTEM - fabfile
+# chef/solo or fabfile to:
+# fabfile users/sudoers
+# fabfile config os/fw/ports/broadcasts
+# SSH keys
+
+#TODO: bootstrap SW (DONE)
+# bootstrap SW - install apps etc
