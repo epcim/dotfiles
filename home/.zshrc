@@ -5,9 +5,9 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
 ZSH_THEME="solarized-powerline"
 ZSH_THEME="powerline"
+ZSH_THEME="robbyrussell"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -81,7 +81,7 @@ source $HOME/.zshrc.local
 HOWTO="$HOME/hg2g/howto"
 HG2GL="/hg2g/home/pmichalec/hg2g"
 
-wmname LG3D
+which wmname > /dev/null && wmname LG3D
 export TERM="xterm-256color"
 export AWT_TOOLKIT=MToolkit
 
@@ -97,13 +97,13 @@ setopt append_history
 setopt inc_append_history
 setopt extended_history
 setopt hist_find_no_dups
-#setopt hist_ignore_all_dups
-#setopt hist_reduce_blanks
-#setopt hist_ignore_space
-#setopt hist_no_store
-#setopt hist_no_functions
-#setopt no_hist_beep
-#setopt hist_save_no_dups
+setopt hist_ignore_all_dups
+setopt hist_reduce_blanks
+setopt hist_ignore_space
+setopt hist_no_store
+setopt hist_no_functions
+setopt no_hist_beep
+setopt hist_save_no_dups
 
 # Set options
 export LANG=en_US.UTF-8
@@ -216,25 +216,25 @@ colors
 ##allow tab completion in the middle of a word
 setopt COMPLETE_IN_WORD
 ## keep background processes at full speed
-#setopt NOBGNICE
+setopt NOBGNICE
 ## restart running processes on exit
 #setopt HUP
 
 
 setopt EXTENDED_GLOB         # roz???en? ?ol?kov? znaky
-setopt NO_CLOBBER            # ochrana p?i p?esm?rov?v?n? v?stup?
+#setopt NO_CLOBBER            # ochrana p?i p?esm?rov?v?n? v?stup?
 setopt CORRECTALL            # opravy p?eklep?
 #setopt NO_BEEP              # nep?pat p?i chyb?ch
 
 # File completion
-setopt AUTOLIST              # vypisuje mo?nosti pro dopln?n?
-setopt NO_LIST_AMBIGUOUS     # vypisuje je HNED, ne a? p?i druh?m <Tab>
-setopt LIST_PACKED           # zkr?cen? v?pis
-setopt AUTOCD		# doplni cd na zacatek jmena napsaneho adresare
+#setopt AUTOLIST              # vypisuje mo?nosti pro dopln?n?
+#setopt NO_LIST_AMBIGUOUS     # vypisuje je HNED, ne a? p?i druh?m <Tab>
+#setopt LIST_PACKED           # zkr?cen? v?pis
+#setopt AUTOCD		# doplni cd na zacatek jmena napsaneho adresare
 #
-zmodload -i zsh/complist     # obarv? vypisovan? soubory
-LS_COLORS="di=01;32;40:$LS_COLORS"	# http://zsh.sunsite.dk/Guide/zshguide06.html
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+#zmodload -i zsh/complist     # obarv? vypisovan? soubory
+#LS_COLORS="di=01;32;40:$LS_COLORS"	# http://zsh.sunsite.dk/Guide/zshguide06.html
+#zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 #
 #autoload zmv		         # skupinove presouvani a prejmenovani	zmv (*).doc $1.txt | zmv (**/)README $1CTIMNE
 ###autoload -U compinit         # aktivuje "standardn?" pravidla pro dopl?ov?n?
