@@ -4,13 +4,15 @@
 #SAVEIFS=$IFS
 #IFS=$(echo -en "\n\b")
 
-test -z $HOWTO && HOWTO="$HOME/hg2g/howto"
-export $HOWTO; test -d $HOWTO || mkdir -p $HOWTO
+test -z $HOWTO && export HOWTO="$HOME/hg2g/howto"
+test -d $HOWTO || mkdir -p $HOWTO
 
 autoload -U colors
 colors
 
-FOUND=`find $HOWTO/ -type f | grep "$1" --color`
+FOUND=`find $HOWTO/ | grep "$1" --color`
+#echo $FOUND
+#exit 0
 
 
 #PRINT
