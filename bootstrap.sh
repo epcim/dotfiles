@@ -7,8 +7,8 @@ git clone git://github.com/epcim/homeshick.git $HOME/.homesick/repos/homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 #mine
-homeshick clone --batch epcim/dotfiles
-homeshick clone --batch epcim/dotvim
+homeshick clone --batch git://github.com/epcim/dotfiles.git
+homeshick clone --batch git://github.com/epcim/dotvim.git
 
 #zsh & zsh powerline
 homeshick clone --batch robbyrussell/oh-my-zsh
