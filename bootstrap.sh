@@ -13,17 +13,16 @@ source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 # ##############################################################
 
-#mine
+#this
 homeshick clone --batch git://github.com/epcim/dotfiles.git
+#OPTIONALLY
 homeshick clone --batch git://github.com/epcim/dotvim.git
+homeshick clone --batch git://github.com/epcim/dotshell.git
 
-#zsh & zsh powerline
-homeshick clone --batch robbyrussell/oh-my-zsh
-homeshick clone --batch https://github.com/jeremyFreeAgent/oh-my-zsh-powerline-theme.git
+#powerline
+sudo pip install --user git+git://github.com/Lokaltog/powerline
 #powerline awesome/qtile bindings
 homeshick clone --batch https://github.com/Lokaltog/powerline
-#powerline itself
-sudo pip install --user git+git://github.com/Lokaltog/powerline
 
 
 #setup +x for all *.sh.* files in the repo
@@ -31,6 +30,7 @@ find . -name "*.sh*" -type f -exec chmod u+x "{}" ";"
 chmod u+x home/bin/*
 
 homeshick link
+#TODO: call all bootstrap.sh (in other repos)
 
 which zsh && chsh -s $(which zsh)
 ln -s $HOME/.homesick/repos/oh-my-zsh-powerline-theme/powerline.zsh-theme $HOME/.oh-my-zsh/themes/
