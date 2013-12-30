@@ -1,0 +1,14 @@
+
+# create/deploy w/universal configurable bootstrap for any homeshick + fabs
+## deploy homeshick
+## bootstrap system (aka OS)
+    - things like ports/firewall
+    - broadcasting
+    - sharing etc
+## bootstrap software
+## bootstrap backup/restore (for backup to git-annex and only not already versioned configs)
+    - mozila, thunderbird (profiles from home backup, mozilla kvartalne; jinne denne atp.)
+    - git annex itself
+    - git annex repositories
+## bootstrap home custom "hg2g" folder structure
+

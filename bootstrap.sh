@@ -1,10 +1,17 @@
 #!/bin/bash -ex
 
-#TODO: homeshick hook to set +x to .sh files, or workaround
+#TODO: Install git, zsh
+#TODO: update to chef recipe
 
+
+# ##############################################################
+
+#TODO: MANUAL PREREQ to deply this homeshick (can be Chef recipe task)
 #git clone "https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick"
 git clone git://github.com/epcim/homeshick.git $HOME/.homesick/repos/homeshick
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+
+# ##############################################################
 
 #mine
 homeshick clone --batch git://github.com/epcim/dotfiles.git
@@ -18,15 +25,20 @@ homeshick clone --batch https://github.com/Lokaltog/powerline
 #powerline itself
 sudo pip install --user git+git://github.com/Lokaltog/powerline
 
+
+#setup +x for all *.sh.* files in the repo
+find . -name "*.sh*" -type f -exec chmod u+x "{}" ";"
+chmod u+x home/bin/*
+
 homeshick link
 
-
-INSTALLER=apt-get
-which zsh || sudo $INSTALLER install zsh
 which zsh && chsh -s $(which zsh)
-
 ln -s $HOME/.homesick/repos/oh-my-zsh-powerline-theme/powerline.zsh-theme $HOME/.oh-my-zsh/themes/
 
+#TODO: Remove following platform specific code:
+#install zsh
+INSTALLER=apt-get
+which zsh || sudo $INSTALLER install zsh
 #powerline fonts
 fc-cache -vf ~/.fonts
 

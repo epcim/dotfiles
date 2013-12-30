@@ -1,8 +1,8 @@
-"""
+"fabfile.py""
 Custom - Linux/Max home dir init script.
 """
 VERSION = 1.0
-AUTHOR = "petr_michalec@cz.ibm.com"
+AUTHOR = "petr@apealive.net"
 
 import sys
 import os
