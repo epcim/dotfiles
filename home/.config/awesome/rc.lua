@@ -84,16 +84,18 @@ layouts =
 use_titlebar = false
 
 
-function fileExists(n)
+function fileNotExists(n)
     local f=io.open(n)
-    io.close(f)
+    if f  then
+        io.close(f)
+    end
     return f==nil
 end
 
 
 -- ----------------------------------
 -- Load rc.local.lua
-if fileExists(awful.util.getdir("config") .. "/" .. "rc.local.lua")) then
+if not fileNotExists(awful.util.getdir("config") .. "/" .. "rc.local.lua") then
     dofile(awful.util.getdir("config") .. "/" .. "rc.local.lua")
 end
 -- ----------------------------------
