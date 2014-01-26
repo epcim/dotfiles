@@ -19,7 +19,7 @@ FOUND=`find $HOWTO/ | grep "$1" --color`
 if [ ! -z $FOUND ]; then
 	echo ""
 	#print found
-	echo $FOUND | sed -e 's/^/vim /' -e "s:$HOWTO:\$HOWTO:" |grep --color $1
+	echo $FOUND | sed -e "s/^/$EDITOR /" -e "s:$HOWTO:\$HOWTO:" |grep --color $1
 	echo ""
 	#print found executable
 	for i in `echo $FOUND|xargs`;do 
@@ -39,7 +39,7 @@ else
 		[[ -x $FOUND ]] && $FOUND $2
 	fi
 	# open or create new doc
-	test -e "$FOUND" && vim ${FOUND} || vim $HOWTO/$1.howto
+	test -e "$FOUND" && $EDITOR ${FOUND} || $EDITOR $HOWTO/$1.howto
 fi
 
 
