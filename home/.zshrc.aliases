@@ -54,7 +54,6 @@ alias "rc-${service}"="sudo ${service}"
 alias svi='sudo vi'
 # virtualenv aliases
 alias v.source='. /usr/local/bin/virtualenvwrapper.sh'
-alias v='workon'
 alias v.deactivate='deactivate'
 alias v.mk='mkvirtualenv --no-site-packages'
 alias v.mk_withsitepackages='mkvirtualenv'
@@ -80,6 +79,11 @@ alias hs='homeshick'
 alias hst='homeshick track'
 alias hsr='homeshick refresh'
 alias hsc='homeshick check'
+#vagrant
+alias v='vagrant'
+alias va='vagrant'
+#markdown editor
+alias md='haroopad'
 
 #screenshots
 #alias zz='scrot -s'
