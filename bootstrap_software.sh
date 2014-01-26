@@ -20,6 +20,8 @@ sudo add-apt-repository ppa:graysky/utils
 sudo add-apt-repository ppa:nvbn-rm/ppa
 #libreoffice (latest)
 sudo add-apt-repository ppa:libreoffice/ppa
+#smuxi irc client
+sudo add-apt-repository ppa:meebey/ppa
 sudo apt-get update
 
 ## Install base
