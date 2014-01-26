@@ -1,0 +1,15 @@
+#!/bin/zsh
+
+autoload -U colors
+colors
+
+## open reference file:linenuber by vim like ../libanki/anki/stats.py +280
+
+#newargs=`echo "$*"|sed -e 's/:/ +/g'`
+#vim $newargs 
+
+for f in $*; do
+  file=`echo $f | sed -e 's/\(.*\):\([0-9]*\)/\1/' `;
+  line=`echo $f | sed -e 's/\(.*\):\([0-9]*\)/\2/' `;
+  $EDITOR $file +$line"
+done  
