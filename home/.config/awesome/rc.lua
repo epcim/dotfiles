@@ -186,7 +186,8 @@ shifty.config.tags = {
         layout   = awful.layout.suit.max,
         position = 5,
 		screen= 2,
-		spawn = "/opt/openoffice4/program/soffice",
+        slave     = false,
+		spawn = "lo",
     },
     tv = {
         layout   = awful.layout.suit.max.fullscreen,
