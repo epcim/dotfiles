@@ -11,5 +11,5 @@ colors
 for f in $*; do
   file=`echo $f | sed -e 's/\(.*\):\([0-9]*\)/\1/' `;
   line=`echo $f | sed -e 's/\(.*\):\([0-9]*\)/\2/' `;
-  $EDITOR $file +$line"
-done  
+  $EDITOR $file +$line
+done
