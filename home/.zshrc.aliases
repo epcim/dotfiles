@@ -134,3 +134,7 @@ alias -g X='| xargs'
 
 alias mc="LANG=C mc"
 #alias nautilus="nautilus --browser --no-desktop"
+#
+#Chef
+alias knife='nocorrect knife'
+
