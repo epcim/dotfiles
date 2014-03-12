@@ -1,4 +1,4 @@
-"fabfile.py""
+"""fabfile.py
 Custom - Linux/Max home dir init script.
 """
 VERSION = 1.0
@@ -199,7 +199,7 @@ def runcmd(c):
 
 
 @task
-def push_key(key_file='~/.ssh/id_dsa.pub', user='root'):
+def push_key(key_file='~/.ssh/id_dsa.pub', user='root', password='passw0rd'):
     """ Append passed ssh pubkey to destination host (if not exist already)
     """
     #different ssh port
@@ -210,9 +210,10 @@ def push_key(key_file='~/.ssh/id_dsa.pub', user='root'):
         _generatePassword(user)
         key_text = _read_key_file(key_file).strip()
         run('mkdir -p ~/.ssh/')
-        append('~/.ssh/authorized_keys2', key_text)
-
-        #TODO: Rights/mod
+        append('~/.ssh/authorized_keys', key_text)
+        run('chmod 755 ~/.ssh')
+        run('chmod 600 ~/.ssh/*')
+        run('which restorecon && restorecon -R -v ~/.ssh/*')
 
 
 #TODO: Task pust zsh profile
