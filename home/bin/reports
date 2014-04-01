@@ -7,7 +7,8 @@ NOTE=""
 # search
 if [ "$1" == "" ] ; then
 	find . -name '*.report*' -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
-    echo "Use `haroopad ` or `vim ` to edit."
+    echo "Use 'haroopad ' or 'vim ' to edit."
+    exit 0
 fi;
 
 # create new
