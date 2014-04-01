@@ -1,5 +1,5 @@
 """fabfile.py
-Custom - Linux/Max home dir init script.
+Linux/AIX remote management script
 """
 VERSION = 1.0
 AUTHOR = "petr@apealive.net"
@@ -12,6 +12,8 @@ from fabric.api import *
 from fabric.colors import *
 from fabric.contrib.files import append, exists, comment, contains
 from fabric.contrib.console import confirm
+
+import fabcfg as my
 
 ## TUTORIAL
 ##
@@ -40,95 +42,39 @@ from fabric.contrib.console import confirm
 ## fab l:t1 -x was-t2.out.vis,esb-t2.out.vis checkRunningJava:False switchStage switchStage:2 switchStage
 ##
 
-env.settings = {
-    'ibm': {
-        'hostname': 'bluepanic',
-        'hosts': [],
-    },
-    'apelinux': {
-        'hostname': 'dontpanic',
-        'hosts': [],
-        'roledefs': {
-		'x': ['xxx.xxx.xx'],
-        },
-    },
-}
+env.settings = {}
 
 
-#def vt():
-#    env.update(env.settings['vums.vt'])
-#    for l in env.roledefs.values():
-#        env.hosts.extend(l)
-#
-#
-
-#def setinst_vd():
-#    env.update(env.settings['vums.vd'])
-#    for l in env.roledefs.values():
-#        env.hosts.extend(l)
-
-@task(alias='i')
-def instance(type):
-    """ Set enviroment values for instance type. Argument ibm/apelinux/apeapple etc..
+@task(alias='e')
+def environment(type):
+    """ Set enviroment settings
     """
-    env.update(env.settings[type])
+    env.update(my.env_settings[type])
     for l in env.roledefs.values():
         env.hosts.extend(l)
 
-#@task(alias='i')
-#def instance(location):
-#    """ Set enviroment values for instance type. Argument ibm/apelinux/apeapple etc..
-#    """
-#    namespace = __import__(__name__)
-#    getattr(namespace, 'setloc_' + location)()
-
 ######################
 
-@task
-def initOS():
-    print "Hostname: %s" % env['hostname']
-    pass
+@task(alias='b')
+def bootstrap(password=None):
+    if env.key_filename:
+        for key in env.key_filename:
+            push_key(key_file=key+'.pub', user='root', password=password, force=True)
+            push_key(key_file=key+'.pub', user='root', password=password, force=True)
+
+
+@task(alias='r2g')
+def addVPNRoute2Gateway(vpn_cidr='10.8.0.0/16', vpn_gw=None):
+    env.key_filename = []
+    if vpn_gw:
+        env.gateway = vpn_gw
+    sudo("ip ro add %s via %s" % (vpn_cidr, env.gateway))
 
 @task
-def initHome(user='pmichalec', boxdir='/hg2g/dav/box'):
-
-    #box sync
-
-    #configure users/system crontab to sync?
-
-    #init default dirs
-    #local("""
-    #	    cd /home/pmichalec
-    #	    for i in `echo .stardict .rednotebook .svn .git .hg bin other .xsession .xinitrc .profile .bashrc .ssh .mc .zshrc .zsh .config |xargs`; do
-    #			cd;
-    #
-    #			#backup existing
-    #			test -e ./$i && {{
-    #			  test -L ./$i || mv "./$i" "./$i.ori";
-    #			}}
-    #
-    #			test ln -s /hg2g/home/pmichalec/$i ./$i;
-    #	    done;
-    #   """)
-
-    #once only
-    local("mv /hg2g/home_pmichalecibm/lotus /home/pmichalec/lotus")
-    local("mv /hg2g/home_pmichalecibm/.notes /home/pmichalec/.notes")
-    local("mv /hg2g/home_pmichalecibm/.notesrc /home/pmichalec/.notesrc")
-    local("mv /hg2g/home_pmichalecibm/.fetchnotesrc /home/pmichalec/.fetchnotesrc")
-
-
-@task
-def box(action="None", boxdir="/hg2g/dav/box"):
-    pass
-
-######################
-
-@task
-def checkRunning(process, dry=True):
+def checkProcess(process, dry=True):
     """ Check for running process on host
     """
-    _generatePassword(user='root')
+    _defaultPassword(user='root')
     if _online(env.host) is True:
         with settings(hide('running'), warn_only=dry, skip_bad_hosts=dry):
             #TODO: Return count (pids) - but count them
@@ -138,15 +84,45 @@ def checkRunning(process, dry=True):
 
 
 @task
-@roles('was', 'esb', 'dm')
+@roles('itm')
 def checkRunningJava(dry=True):
     """ Check for running java processes on host
     """
-    _generatePassword(user='root')
+    _defaultPassword(user='root')
     with settings(hide('running', 'stdout')):
-        checkRunning(dry=dry, process='java')
+        checkProcess(dry=dry, process='java')
 
 
+@task(alias='r')
+def runcmd(c):
+    """ Run given cmd on all hoststs in environment.
+    Example: fab l:vt r:'killall java',exclude_hosts='vt-was3' -P
+    """
+    if _online(env.host) is True:
+        run(c)
+
+
+@task
+def push_key(key_file='~/.ssh/id_dsa.pub', user='root', password=None, force=False):
+    """ Append passed ssh pubkey to destination host (if not exist already)
+    """
+    #different ssh port
+    #_oncePerPhysicalHost()
+    _skipExcluded()
+
+    if (_online(env.host) is True) or (force is True):
+        _defaultPassword(user,password)
+        key_text = _read_key_file(key_file).strip()
+        run('test -d ~/.ssh || mkdir -p ~/.ssh/')
+        append('~/.ssh/authorized_keys', key_text)
+        run('chmod 755 ~/.ssh')
+        run('chmod 600 ~/.ssh/*')
+        run('which restorecon && restorecon -R -v $HOME/.ssh/* || echo NORESTORECONF')
+
+
+
+## ########################################################################
+## COMPLEX EXAMPLE
 #@task
 #@roles('was', 'esb', 'dm')
 #def switchStage(stage=None):
@@ -159,7 +135,7 @@ def checkRunningJava(dry=True):
 #    #    #was-t2 and esb-t2 share shame pysical host
 #    #    env.hosts.remove('was-t2.out.vis')
 #
-#    _generatePassword(user='root')
+#    _defaultPassword(user='root')
 #
 #    if stage:
 #        #Etapa1,2 Skol1,2
@@ -189,69 +165,8 @@ def checkRunningJava(dry=True):
 #                    run('ls -la /opt/IBM/ | grep SharedLib |grep ^l')
 #
 
-@task(alias='r')
-def runcmd(c):
-    """ Run given cmd on all hoststs in environment.
-    Example: fab l:vt r:'killall java',exclude_hosts='vt-was3' -P
-    """
-    if _online(env.host) is True:
-        run(c)
 
-
-@task
-def push_key(key_file='~/.ssh/id_dsa.pub', user='root', password='passw0rd'):
-    """ Append passed ssh pubkey to destination host (if not exist already)
-    """
-    #different ssh port
-    #_oncePerPhysicalHost()
-    _skipExcluded()
-
-    if _online(env.host) is True:
-        _generatePassword(user)
-        key_text = _read_key_file(key_file).strip()
-        run('mkdir -p ~/.ssh/')
-        append('~/.ssh/authorized_keys', key_text)
-        run('chmod 755 ~/.ssh')
-        run('chmod 600 ~/.ssh/*')
-        run('which restorecon && restorecon -R -v ~/.ssh/*')
-
-
-#TODO: Task pust zsh profile
-
-
-
-
-#class Was(object):
-#
-#    def __init__(self):
-#        pass
-#
-#    @task
-#    def tailLogs():
-#        pass
-#
-#    @task
-#    def restartNode():
-#        pass
-#
-#    @task
-#    def rozkopiruj():
-#        pass
-
-
-#class Dm(object):
-#
-#    def __init__(self):
-#        pass
-#
-#    @task
-#    def restartDm():
-#        pass
-#
-#dm = Dm()
-
-
-
+## ########################################################################
 ## PRIVATE METHODS
 
 def _skipExcluded():
@@ -355,8 +270,15 @@ def _runbg(cmd, sockname="dtach"):
     return run('dtach -n `mktemp -u /tmp/%s.XXXX` %s' % (sockname, cmd))
 
 
-def _generatePassword(user=None):
-    env.password = 'vis' + "".join(env.host.split('.')[0].split('-'))
+def _defaultPassword(user=None,password=None):
+    if password:
+        env.password = password
+    if not env.password:
+        try:
+            env.password = env.password_preffix+env.password_suffix if env.password_preffix else 'passw0rd'
+        except AttributeError:
+            env.password='passw0rd'
+
     env.user = user if user else env.user
     print 'user:' + env.user
     print 'pass:' + env.password
