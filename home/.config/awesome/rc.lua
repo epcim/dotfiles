@@ -169,7 +169,7 @@ shifty.config.tags = {
         init      = false,
         slave     = false,
         position  = 8,
-        max_clients = 2,
+        max_clients = 1,
         spawn 	= editor,
     },
     terminal = {
