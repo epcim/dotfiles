@@ -1,0 +1,11 @@
+#!/bin/bash
+
+success=`ls /opt/libreoffice*/share/gallery/sounds/kongas.wav|tail -n1`
+failure=`ls /opt/libreoffice*/share/gallery/sounds/drama.wav|tail -n1`
+play=$success
+
+[[ "$1" == "fail" ]] && play=$failure && shift
+[[ "$1" != "fail" ]] && [[ "x$1" != "x" ]] && play="`ls /opt/libreoffice*/share/gallery/sounds/*$1*|tail -n1`" && shift
+
+aplay -q $@ "$play"
+
