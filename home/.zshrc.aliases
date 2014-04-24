@@ -138,3 +138,6 @@ alias mc="LANG=C mc"
 #Chef
 alias knife='nocorrect knife'
 
+#ruby
+#alias gem="sudo gem"
+alias be="bundle exec"
