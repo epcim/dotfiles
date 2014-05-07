@@ -1,7 +1,7 @@
 #!/bin/bash
 
-success=`ls /opt/libreoffice*/share/gallery/sounds/kongas.wav|tail -n1`
-failure=`ls /opt/libreoffice*/share/gallery/sounds/drama.wav|tail -n1`
+success=`ls ~/Music/success*.wav|tail -n1`
+failure=`ls ~/Music/failure*.wav|tail -n1`
 play=$success
 
 [[ "$1" == "fail" ]] && play=$failure && shift
