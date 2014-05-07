@@ -24,3 +24,5 @@ win_title=%s
 browser_spawn_type=0
 tab_close_btn=0
 wrap_switch_tab=1
+colour_scheme=
+middle_click_tab=2
