@@ -79,6 +79,8 @@ ignore_ftp_chattr_errors=true
 keymap=
 skin=default
 
+horizontal_split=0
+
 [Layout]
 message_visible=1
 keybar_visible=1
@@ -92,6 +94,9 @@ vertical_equal=1
 left_panel_size=71
 horizontal_equal=1
 top_panel_size=1
+
+equal_split=1
+first_panel_size=113
 
 [Misc]
 timeformat_recent=%b %e %H:%M
