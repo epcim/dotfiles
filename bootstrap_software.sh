@@ -22,7 +22,12 @@ sudo add-apt-repository ppa:nvbn-rm/ppa
 sudo add-apt-repository ppa:libreoffice/ppa
 #smuxi irc client
 sudo add-apt-repository ppa:meebey/ppa
+#audio-recorder
+apt-add-repository ppa:osmoma/audio-recorder
+
+#install
 sudo apt-get update
+sudo apt-get install audio-recorder -y
 
 ## Install base
 echo -e "\n"
