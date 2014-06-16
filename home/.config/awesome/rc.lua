@@ -55,6 +55,10 @@ if os.hostname == "dontpanic-vm" then
 	wibox_pos = "bottom"
 end
 
+--core background tasks
+--ssh agent
+--awful.util.spawn_with_shell("eval `ssh-agent -s`")
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key, I suggest you to remap
