@@ -1,0 +1,61 @@
+tmux virtualenvwrapper
+everpad
+gnome-common
+openssh-server
+ilc
+ibmsam
+ibm-lotus-notes
+agnclient openclient-agnclient-notifications agnclient-compat
+network-manager-openvpn-gnome network-manager-vpnc-gnome network-manager-openconnect-gnome
+overlay-scrollbar-gtk3
+gdb
+cmake
+fonts-font-awesome awesome awesome-extra
+iproute2
+iproute
+arandr
+remmina-plugin-xdmcp remmina-plugin-nx
+remmina-plugin-gnome
+xtv
+xnest
+smuxi-frontend-gnome
+libgnomekbd-common gkbd-capplet
+gnome-applets
+libgnome-control-center1 gnome-control-center account-plugin-twitter account-plugin-flickr
+zenity zenity-common
+libgnomeui-0 libgnomeui-common
+libgnomeui-0 libgnomeui-common --reinstall
+libxml2
+--reinstall libxml2
+libgecode32
+libgecodeflatzinc32 libgecodegist32
+libgecodeflatzinc32 libgecodegist32
+libruby
+libyaml-dev
+gdb
+libcups2
+ubuntu-desktop
+gdb
+awesome
+nomachine
+nfs-common
+ruby2.0
+rbenv ruby-build
+npm
+mercurial
+shelldap
+ack-grep
+system-config-printer-gnome
+gstreamer1.0-plugins-bad
+gnome-control-center
+gnome-control-center libgnome-control-center1
+gnome-control-center libgnome-control-center1 unity-control-center
+ginn
+touchegg
+polari
+docker
+iotop
+--yes encfs cryptkeeper
+ecryptfs-utils
+network-manager-openvpn-gnome
+--reinstall network-manager-openvpn-gnome vpnc
