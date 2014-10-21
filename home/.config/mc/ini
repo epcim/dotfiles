@@ -81,7 +81,6 @@ skin=default
 editor_cursor_after_inserted_block=0
 editor_ask_filename_before_edit=0
 editor_filesize_threshold=64M
-horizontal_split=0
 
 [Layout]
 message_visible=1
@@ -93,12 +92,10 @@ menubar_visible=1
 free_space=1
 horizontal_split=0
 vertical_equal=1
-left_panel_size=88
+left_panel_size=66
 horizontal_equal=1
 top_panel_size=1
 
-equal_split=1
-first_panel_size=113
 
 [Misc]
 timeformat_recent=%b %e %H:%M

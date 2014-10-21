@@ -59,3 +59,51 @@ iotop
 ecryptfs-utils
 network-manager-openvpn-gnome
 --reinstall network-manager-openvpn-gnome vpnc
+darktable
+unetbootin
+python-glade2
+glade
+glade-gtk2
+ksh
+--reinstall ibm-tivoli-endpoint-manager-agent
+dconf-tools
+aria2
+nmapfe
+gwakeonlan
+pdfsam
+ibm-opensocial ibm-activities
+ibm-j2sdk1.7
+ibm-print-conf-daemon
+ibm-global-print
+ocdc-repository
+gparted
+btrfs-tools
+pdftk
+gimp
+gsmartcontrol
+ubuntu-tweak
+libav-tools
+ibm-cck
+youtube-dl
+i3
+owncloud-client
+ldap-utils
+slapd
+gnutls-bin
+xtightvncviewer
+dvb-apps
+gnome-dvb-daemon gnome-dvb-client totem-plugins-dvb-daemon
+atftpd
+gnome-dvb-client gnome-dvb-daemon totem-plugins-dvb-daemon
+openclient-savap-config ibm-firewall openclient-savap-modules savap savjlu savui sav
+dnsmasq
+ibm-activities
+samba-common-bin smbclient nautilus-share cifs-utils
+graphviz
+gconf-editor
+laptop-mode-tools
+network-manager-pptp network-manager-pptp-gnome
+network-manager-pptp
+bluez libbluetooth3 bluez-tools bluez-utils
+dnsmasq-base
+mdns-scan avahi-daemon

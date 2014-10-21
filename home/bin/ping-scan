@@ -3,18 +3,13 @@
 P_LIMIT=`ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'`
 P_LIMIT_N=`echo $P_LIMIT + 700|bc`
 
+function pingHost {
+    ping -c5 $1 2>/dev/null > /dev/null && echo -e "\nOnLine - $1"
+}
 
-#echo $P_LIMIT
-#echo $P_LIMIT_N
-
-ulimit -u $P_LIMIT_N
-~/bin/.ping-scan $@ | sed -e 's/.*\ \(.*\)\:.*/\1/' | sort -u
-ulimit -u $P_LIMIT
-
-#if [ `grep fork $TEMP|wc -l` -ge 2 ] ; then
-#	ulimit -u `echo \`ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'\` + 255 |bc`
-#	echo ulimit set to: `ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'`
-#fi;
-#cat $TEMP
-
-
+#ulimit -u $P_LIMIT_N
+#~/bin/.ping-scan $@ | sed -e 's/.*\ \(.*\)\:.*/\1/' | sort -u
+for i in `seq 1 255`; do 
+    pingHost "$@.$i" &
+done
+#ulimit -u $P_LIMIT  
