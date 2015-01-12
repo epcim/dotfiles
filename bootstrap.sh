@@ -7,22 +7,27 @@
 # ##############################################################
 
 #TODO: MANUAL PREREQ to deply this homeshick (can be Chef recipe task)
-#git clone "https://github.com/andsens/homeshick.git $HOME/.homesick/repos/homeshick"
-git clone git://github.com/epcim/homeshick.git $HOME/.homesick/repos/homeshick
+test -d $HOME/.homesick/repos/homeshick || {
+    git clone "https://github.com/andsens/homeshick.git" $HOME/.homesick/repos/homeshick
+}
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
 # ##############################################################
 
 #this
-homeshick clone --batch git://github.com/epcim/dotfiles.git
+test -d $HOME/.homesick/repos/dotfiles || \
+    homeshick clone --batch git://github.com/epcim/dotfiles.git
 #OPTIONALLY
-homeshick clone --batch git://github.com/epcim/dotvim.git
-homeshick clone --batch git://github.com/epcim/dotshell.git
+test -d $HOME/.homesick/repos/dotvim || \
+    homeshick clone --batch git://github.com/epcim/dotvim.git
+test -d $HOME/.homesick/repos/dotshell || \
+    homeshick clone --batch git://github.com/epcim/dotshell.git
 
 #powerline
 sudo pip install --user git+git://github.com/Lokaltog/powerline
 #powerline awesome/qtile bindings
-homeshick clone --batch https://github.com/Lokaltog/powerline
+test -d $HOME/.homesick/repos/powerline || \
+    homeshick clone --batch https://github.com/Lokaltog/powerline
 
 
 #setup +x for all *.sh.* files in the repo
