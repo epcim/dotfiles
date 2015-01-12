@@ -12,6 +12,9 @@ test -d $HOME/.homesick/repos/homeshick || {
 }
 source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 
+}
+
+
 # ##############################################################
 
 #this
