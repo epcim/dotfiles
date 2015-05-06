@@ -74,6 +74,8 @@ alias gk='gitk --all&'
 alias gx='gitx --all'
 alias got='git '
 alias get='git '
+alias gl='git lg'
+alias gh='git lg'
 #homeshick
 alias hs='homeshick'
 alias hst='homeshick track'
@@ -144,3 +146,11 @@ alias be="bundle exec"
 
 #programming
 which ack || alias ack="ack-grep"
+
+
+
+#programming
+alias tasks='grep --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn -rEI "TODO|FIXME|TBD|GRRR|HACK" . 2>/dev/null '
+
+
+

@@ -10,6 +10,9 @@ function pingHost {
 #ulimit -u $P_LIMIT_N
 #~/bin/.ping-scan $@ | sed -e 's/.*\ \(.*\)\:.*/\1/' | sort -u
 for i in `seq 1 255`; do 
+    echo "ping host $@.$i"
     pingHost "$@.$i" &
 done
-#ulimit -u $P_LIMIT  
+#ulimit -u $P_LIMIT
+
+

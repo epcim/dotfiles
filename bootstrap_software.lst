@@ -107,3 +107,58 @@ network-manager-pptp
 bluez libbluetooth3 bluez-tools bluez-utils
 dnsmasq-base
 mdns-scan avahi-daemon
+--reinstall gnome-themes-standard-data:
+--reinstall gnome-themes-standard:amd64
+gnome-themes-standard
+libcanberra-gtk-module
+libcanberra-gtk-module --reinstall
+libcanberra-gtk-module
+ipython bpython
+bzr
+couchdb
+--reinstall couchdb
+exuberant-ctags
+rrdtool
+--reinstall couchdb
+librrd-dev
+--reinstall couchdb
+--reinstall couchdb
+xclip
+--reinstall couchdb
+rpm
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+libjpeg-dev
+--reinstall couchdb
+docker.io
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+mdadm
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+--reinstall couchdb
+libfreeimage3
+libois-1.3.0
+valgrind
+firefox-globalmenu thunderbird-globalmenu
+l2tp-ipsec-vpn network-manager-l2tp-gnome
+l2tp-ipsec-vpn
+ca-certificates ibm-ca-certificates
+ca-certificates-java
+ca-certificates
+docker.io
+pcscd
+openct
+anyconnect
+docker.io
+xclip
+parcellite
+parcellite
