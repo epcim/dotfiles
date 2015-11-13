@@ -5,14 +5,16 @@
 NOTE=""
 
 # search
-if [ "$1" == "" ] ; then
-	find . -name '*.report*' -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
+if [ "$1" == "" ] ;then
+	#find . -type f \( -name "*report*" -o -name "*.md" \) -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
+	find . -type f -name '*report*' -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
     echo "Use 'haroopad ' or 'vim ' to edit."
     exit 0
 fi;
 
 # create new
 if [ "$1" != "" ] ;then
+    NAME=$1
     SUFFIX=`basename $1|sed -e 's/.*\.\([a-zA-Z0-9]*\)/\1/'`
     test -z $SUFFIX || SUFFIX=md
 
@@ -47,6 +49,6 @@ if [ "$1" != "" ] ;then
     # Open
     hpad=$(which haroopad)
     test -x "$hpad" -a "$SUFFIX" = "md" && EDITOR=$(which haroopad)
-    $EDITOR $NAME.report.$SUFFIX 2> /dev/null;
+    $EDITOR ${NAME}.report.${SUFFIX} 2> /dev/null;
 fi
 exit 0

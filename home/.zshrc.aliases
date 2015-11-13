@@ -11,9 +11,9 @@ alias rm="nocorrect rm -i"
 alias mv="nocorrect mv -i"
 alias df='df -h'
 #alias ls='ls -h --color=auto'
-alias ls='ls -h'
-#alias ll='ls -rtalh --color=auto' # bez ll nema smysl zit
-alias ll='ls -rtalh' # bez ll nema smysl zit
+alias ls='ls -h --color=always'
+#alias ll='ls -rtalh --color=always' # bez ll nema smysl zit
+alias ll='ls -rtalh --color=always' # bez ll nema smysl zit
 alias du='du -h'
 alias links='links -g'
 alias ys="sudo yum search"
@@ -69,7 +69,8 @@ alias ga='git add '
 alias gb='git branch '
 alias gc='git commit'
 alias gd='git diff'
-alias go='git checkout '
+alias ge='git checkout '
+alias gob='git checkout '
 alias gk='gitk --all&'
 alias gx='gitx --all'
 alias got='git '
@@ -86,6 +87,9 @@ alias v='vagrant'
 alias va='vagrant'
 #markdown editor
 alias md='haroopad'
+# bash
+alias ghi='history | egrep $@ '
+alias gha='egrep ~/.*history* -e $@'
 
 #screenshots
 #alias zz='scrot -s'
@@ -140,17 +144,31 @@ alias mc="LANG=C mc"
 #Chef
 alias knife='nocorrect knife'
 
+#kitchen ci
+alias k='kitchen'
+alias kt='kitchen test'
+alias kv='kitchen verify'
+alias kl='kitchen list'
+alias kli='kitchen list'
+alias klo='kitchen login'
+alias kd='kitchen destroy'
+alias kc='kitchen converge'
+
 #ruby
 #alias gem="sudo gem"
 alias be="bundle exec"
 
 #programming
 which ack || alias ack="ack-grep"
-
-
-
-#programming
 alias tasks='grep --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn -rEI "TODO|FIXME|TBD|GRRR|HACK" . 2>/dev/null '
 
+# gist
+alias gistAdd="gist -co"
+alias gistSearch="gist -l|egrep "
+alias gistOnline="echo 'https://gist.github.com/search?utf8=%E2%9C%93&ref=searchresults&q=user%3Aepcim+'"
+alias urlize="sed 's/ /%20/g'"
 
 
+# beepme
+alias bs='beepme'
+alias bf='beepme fail'

@@ -1,164 +1,145 @@
-tmux virtualenvwrapper
-everpad
-gnome-common
-openssh-server
-ilc
-ibmsam
-ibm-lotus-notes
-agnclient openclient-agnclient-notifications agnclient-compat
-network-manager-openvpn-gnome network-manager-vpnc-gnome network-manager-openconnect-gnome
-overlay-scrollbar-gtk3
-gdb
-cmake
-fonts-font-awesome awesome awesome-extra
-iproute2
-iproute
-arandr
-remmina-plugin-xdmcp remmina-plugin-nx
-remmina-plugin-gnome
-xtv
-xnest
-smuxi-frontend-gnome
-libgnomekbd-common gkbd-capplet
-gnome-applets
-libgnome-control-center1 gnome-control-center account-plugin-twitter account-plugin-flickr
-zenity zenity-common
-libgnomeui-0 libgnomeui-common
-libgnomeui-0 libgnomeui-common --reinstall
-libxml2
---reinstall libxml2
-libgecode32
-libgecodeflatzinc32 libgecodegist32
-libgecodeflatzinc32 libgecodegist32
-libruby
-libyaml-dev
-gdb
-libcups2
-ubuntu-desktop
-gdb
-awesome
-nomachine
-nfs-common
-ruby2.0
-rbenv ruby-build
-npm
-mercurial
-shelldap
+account-plugin-flickr
+account-plugin-twitter
 ack-grep
-system-config-printer-gnome
-gstreamer1.0-plugins-bad
-gnome-control-center
-gnome-control-center libgnome-control-center1
-gnome-control-center libgnome-control-center1 unity-control-center
-ginn
-touchegg
-polari
-docker
-iotop
---yes encfs cryptkeeper
-ecryptfs-utils
-network-manager-openvpn-gnome
---reinstall network-manager-openvpn-gnome vpnc
+agnclient
+agnclient-compat
+anyconnect
+apache2-utils
+apt-file
+arandr
+aria2
+atftp
+atftpd
+automake
+avahi-daemon
+awesome
+awesome-extra
+bluez
+bluez-tools
+bluez-utils
+bpython
+btrfs-tools
+bzr
+ca-certificates
+ca-certificates-java
+cifs-utils
+cmake
 darktable
-unetbootin
-python-glade2
+dconf-tools
+dnsmasq
+dnsmasq-base
+docker
+dstat
+ecryptfs-utils
+everpad
+exuberant-ctags
+figlet
+firefox-globalmenu
+fonts-font-awesome
+gconf-editor
+gdb
+gimp
+ginn
+gkbd-capplet
 glade
 glade-gtk2
-ksh
---reinstall ibm-tivoli-endpoint-manager-agent
-dconf-tools
-aria2
-nmapfe
-gwakeonlan
-pdfsam
-ibm-opensocial ibm-activities
-ibm-j2sdk1.7
-ibm-print-conf-daemon
-ibm-global-print
-ocdc-repository
-gparted
-btrfs-tools
-pdftk
-gimp
-gsmartcontrol
-ubuntu-tweak
-libav-tools
-ibm-cck
-youtube-dl
-i3
-owncloud-client
-ldap-utils
-slapd
-gnutls-bin
-xtightvncviewer
-dvb-apps
-gnome-dvb-daemon gnome-dvb-client totem-plugins-dvb-daemon
-atftpd
-gnome-dvb-client gnome-dvb-daemon totem-plugins-dvb-daemon
-openclient-savap-config ibm-firewall openclient-savap-modules savap savjlu savui sav
-dnsmasq
-ibm-activities
-samba-common-bin smbclient nautilus-share cifs-utils
-graphviz
-gconf-editor
-laptop-mode-tools
-network-manager-pptp network-manager-pptp-gnome
-network-manager-pptp
-bluez libbluetooth3 bluez-tools bluez-utils
-dnsmasq-base
-mdns-scan avahi-daemon
---reinstall gnome-themes-standard-data:
---reinstall gnome-themes-standard:amd64
+gnome-applets
+gnome-common
+gnome-control-center
 gnome-themes-standard
-libcanberra-gtk-module
-libcanberra-gtk-module --reinstall
-libcanberra-gtk-module
-ipython bpython
-bzr
-couchdb
---reinstall couchdb
-exuberant-ctags
-rrdtool
---reinstall couchdb
-librrd-dev
---reinstall couchdb
---reinstall couchdb
-xclip
---reinstall couchdb
-rpm
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
-libjpeg-dev
---reinstall couchdb
-docker.io
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
-mdadm
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
---reinstall couchdb
-libfreeimage3
-libois-1.3.0
-valgrind
-firefox-globalmenu thunderbird-globalmenu
-l2tp-ipsec-vpn network-manager-l2tp-gnome
+gnutls-bin
+golang
+gparted
+graphviz
+gsmartcontrol
+gstreamer1.0-plugins-bad
+gwakeonlan
+httpie
+i3
+ilc
+iotop
+iproute2
+ipython
+jq
+ksh
 l2tp-ipsec-vpn
-ca-certificates ibm-ca-certificates
-ca-certificates-java
-ca-certificates
-docker.io
+laptop-mode-tools
+ldap-utils
+libaa1
+libaa-bin
+libav-tools
+libbluetooth3
+libcanberra-gtk-module
+libcups2
+libgecode32
+libgecodeflatzinc32
+libgecodegist32
+libgmp3-dev
+libgmp-dev
+libgnome-control-center1
+libgnomekbd-common
+libgnomeui-0
+libgnomeui-common
+librrd-dev
+libruby
+libxml2
+libyaml-dev
+lzip
+make
+mdadm
+mdns-scan
+mercurial
+minicom
+nautilus-share
+network-manager-l2tp-gnome
+network-manager-openconnect-gnome
+network-manager-openvpn-gnome
+network-manager-pptp
+network-manager-pptp-gnome
+network-manager-vpnc-gnome
+nfs-common
+nmapfe
+nmon
+nomachine
+npm
+openssh-server
+overlay-scrollbar-gtk3
+pandoc
+parcellite
 pcscd
-openct
-anyconnect
-docker.io
+pdfsam
+pdftk
+pkg-config
+polari
+python-glade2
+rbenv
+remmina-plugin-gnome
+remmina-plugin-nx
+remmina-plugin-xdmcp
+rpm
+rrdtool
+ruby2.0
+ruby-build
+samba-common-bin
+shelldap
+silversearcher-ag
+slapd
+smbclient
+smuxi-frontend-gnome
+system-config-printer-gnome
+thunderbird-globalmenu
+tmux
+ubuntu-desktop
+ubuntu-tweak
+unetbootin
+unity-control-center
+unrar
+virtualenvwrapper
 xclip
-parcellite
-parcellite
+xnest
+xtightvncviewer
+xtv
+xz-utils
+youtube-dl
+zenity
+zenity-common
