@@ -1,11 +1,16 @@
 #!/bin/bash
 
+# Example: $0 $?
+# Example: $0 - alternativeAlert
+
 success=`ls ~/Music/success*.wav|tail -n1`
 failure=`ls ~/Music/failure*.wav|tail -n1`
-play=$success
 
-[[ "$1" == "fail" ]] && play=$failure && shift
-[[ "$1" != "fail" ]] && [[ "x$1" != "x" ]] && play="`ls /opt/libreoffice*/share/gallery/sounds/*$1*|tail -n1`" && shift
+[[ "$1" == "0" ]] && play=$success
+[[ "$1" > "0"  ]] && play=$failure
+[[ "$1" < "0"  ]] && play=$failure
+shift
+[[ "x$1" != "x" ]] && play="`ls /opt/libreoffice*/share/gallery/sounds/*$1*|tail -n1`" && shift
 
 aplay -q $@ "$play"
 

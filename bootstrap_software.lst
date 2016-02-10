@@ -143,3 +143,8 @@ xz-utils
 youtube-dl
 zenity
 zenity-common
+asciinema
+ruby-build
+vim-gui-common
+xpdf
+qpdfview
