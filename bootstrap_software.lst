@@ -148,3 +148,7 @@ ruby-build
 vim-gui-common
 xpdf
 qpdfview
+aufs-tools
+libmagickwand5
+libmagickcore5
+libmagickcore-dev
