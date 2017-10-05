@@ -1,18 +1,10 @@
-#!/bin/zsh
+#!/bin/bash
 
 P_LIMIT=`ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'`
 P_LIMIT_N=`echo $P_LIMIT + 700|bc`
-
-function pingHost {
-    ping -c5 $1 2>/dev/null > /dev/null && echo -e "\nOnLine - $1"
-}
-
 #ulimit -u $P_LIMIT_N
-#~/bin/.ping-scan $@ | sed -e 's/.*\ \(.*\)\:.*/\1/' | sort -u
-for i in `seq 1 255`; do 
-    echo "ping host $@.$i"
-    pingHost "$@.$i" &
-done
 #ulimit -u $P_LIMIT
+
+for i in {1..254}; do ping -c1 $1.$i & done | grep 'time=0.'
 
 

@@ -1,0 +1,57 @@
+#!/bin/bash
+# https://gist.github.com/epcim/3edef4ca7fdcc5237083c8942f7ee7a6
+
+# check ssh version
+SSH_VERSION=$(ssh -V 2>&1 |sed 's/.*OpenSSH.\([0-9]\.[0-9]\).*/\1/i')
+
+# source ~/.ssh/config.d/*.env
+export $(find ~/.ssh/config.d/ -maxdepth 1 -name '*.env' 2>/dev/null | xargs --no-run-if-empty cat ) > /dev/null
+
+function backup() {
+  cp -i ~/.ssh/config ~/.ssh/config.old.$(date "+%y%m%d");
+};
+
+function render-full() {
+  SSH_CONFIG=$(find ~/.ssh/config.d/ -maxdepth 1 -name "*.conf*" | sort | xargs --no-run-if-empty -I{} cat {} | envsubst);
+};
+
+function render-with-includes() {
+  SSH_CONFIG=$(find ~/.ssh/config.d/ -maxdepth 1 -name "*.config" | sort | xargs -n1 --no-run-if-empty -I{} basename {} .config |\
+             xargs -n1 -I{} echo -e "{}*\n  User $USER\n  IdentityFile ${SSH_PRIVATE_KEY:-~/.ssh/id_ed25519}\n  Include ~/.ssh/config.d/{}.config\n\n")
+}
+
+function render {
+  # for OpenSSH < 7.4 compose the ssh config, otherwise generate only "Include" statements.
+  if (( $(bc <<< "$SSH_VERSION < 7.4") ))
+  then
+    render-full
+  elif (( $(bc <<< "$SSH_VERSION >= 7.4") ))
+  then
+    render-with-includes
+  fi
+}
+
+
+render
+
+case "$1" in
+  rewrite|R)
+    backup
+    truncate --size 0 ~/.ssh/config
+    echo -e "$SSH_CONFIG" | tee ~/.ssh/config
+    ;;
+  append|A)
+    backup
+    echo -e "$SSH_CONFIG" | tee -a ~/.ssh/config
+    ;;
+  show|S)
+    echo -e "$SSH_CONFIG"
+    ;;
+  * )
+    # show
+    echo -e "$SSH_CONFIG"
+    ;;
+esac;
+
+
+
