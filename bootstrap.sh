@@ -1,19 +1,21 @@
 #!/bin/bash -ex
 
-#TODO: Install git, zsh
-#TODO: update to chef recipe
+if [[ -e /usr/bin/apt-get ]]; then
+    sudo apt-get install -y git zsh fish curl python-pip
+elif [[ -e /usr/bin/yum ]]; then
+    sudo yum install -y git zsh fish curl python-pip
+elif [[ -e /usr/local/bin/brew ]]; then
+    brew install git zsh fish homeshick
+fi
 
 
 # ##############################################################
 
-#TODO: MANUAL PREREQ to deply this homeshick (can be Chef recipe task)
-test -d $HOME/.homesick/repos/homeshick || {
+# Get homeshick
+which homeshick || {
     git clone "https://github.com/andsens/homeshick.git" $HOME/.homesick/repos/homeshick
+    source "$HOME/.homesick/repos/homeshick/homeshick.sh"
 }
-source "$HOME/.homesick/repos/homeshick/homeshick.sh"
-
-}
-
 
 # ##############################################################
 
@@ -35,18 +37,14 @@ test -d $HOME/.homesick/repos/powerline || \
 
 #setup +x for all *.sh.* files in the repo
 find . -name "*.sh*" -type f -exec chmod u+x "{}" ";"
-chmod u+x home/bin/*
+chmod u+x $HOME/bin/*
 
 homeshick link
-#TODO: call all bootstrap.sh (in other repos)
 
-which zsh && chsh -s $(which zsh)
-ln -s $HOME/.homesick/repos/oh-my-zsh-powerline-theme/powerline.zsh-theme $HOME/.oh-my-zsh/themes/
+echo "call all bootstrap.sh (in other repos)"
+find $HOME/.homesick/repos/ -name "bootstrap.sh" -type f -exec echo "{}" ";"
 
-#TODO: Remove following platform specific code:
-#install zsh
-INSTALLER=apt-get
-which zsh || sudo $INSTALLER install zsh
-#powerline fonts
-fc-cache -vf ~/.fonts
+
+#powerline fonts on linux
+which fc-cache && fc-cache -vf ~/.fonts
 
