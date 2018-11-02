@@ -17,7 +17,7 @@ function render-full() {
 
 function render-with-includes() {
   SSH_CONFIG=$(find ~/.ssh/config.d/ -maxdepth 1 -name "*.config" | sort | xargs -n1 --no-run-if-empty -I{} basename {} .config |\
-             xargs -n1 -I{} echo -e "{}*\n  User $USER\n  IdentityFile ${SSH_PRIVATE_KEY:-~/.ssh/id_ed25519}\n  Include ~/.ssh/config.d/{}.config\n\n")
+             xargs -n1 -I{} echo -e "Host {}*\n  User $USER\n  IdentityFile ${SSH_PRIVATE_KEY:-~/.ssh/id_ed25519}\n  Include ~/.ssh/config.d/{}.config\n\n")
 }
 
 function render {

@@ -23,9 +23,9 @@ print("Entered rc.lua: " .. os.time())
 -- Variable definitions
 -- Themes define colours, icons, and wallpapers
 -- The default is a dark theme
-theme_path = "/usr/share/awesome/themes/sky/theme.lua"
 theme_path = "/usr/share/awesome/themes/default/theme.lua"
 theme_path = "/usr/share/awesome/themes/zenburn/theme.lua"
+theme_path = "/usr/share/awesome/themes/sky/theme.lua"
 -- Uncommment this for a lighter theme
 -- theme_path = "/usr/share/awesome/themes/sky/theme"
 
