@@ -9,8 +9,6 @@ elif [[ -e /usr/local/bin/brew ]]; then
 fi
 
 
-# ##############################################################
-
 # Get homeshick
 which homeshick || {
     git clone "https://github.com/andsens/homeshick.git" $HOME/.homesick/repos/homeshick

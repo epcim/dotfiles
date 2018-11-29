@@ -1,0 +1,124 @@
+
+{
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    "vim.enableNeovim" : true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys":{
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "window.zoomLevel": 1,
+    "files.associations": {
+        "*.toml": "toml"
+    },
+    "[toml]": {},
+    "editor.folding": false,
+    "vs-kubernetes": {
+        "vs-kubernetes.helm-path": "/Users/pmichalec/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+        "vs-kubernetes.draft-path": "/Users/pmichalec/.vs-kubernetes/tools/draft/darwin-amd64/draft"
+    },
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "boundary",
+    "files.trimTrailingWhitespace": true,
+
+    "diffEditor.renderSideBySide": true,
+
+
+    "editor.fontSize": 12,
+    "files.autoSave": "afterDelay",
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "off",
+    "go.gopath": "/Users/pmichalec/go",
+    "go.useLanguageServer": true,
+    "editor.tabCompletion": true,
+    "go.testFlags": [
+        "-v",
+        "-count=1",
+        "-race"
+    ],
+    "go.inferGopath": true,
+    "git.enabled": true,
+    "editor.renderIndentGuides": true,
+    "go.testTimeout": "30s",
+    "terminal.integrated.fontSize": 14,
+
+    "editor.formatOnPaste": true,
+
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>"]
+        }
+    ],
+
+     "vim.normalModeKeyBindingsNonRecursive": [
+         {
+             "before": ["<leader>", "d"],
+             "after": ["d", "d"]
+         },
+         {
+             "before": ["<C-n>"],
+             "commands": [":nohl"]
+         },
+         {
+            "before": [ "<leader>", "o" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.quickOpen"
+                }
+            ]
+        },
+     ],
+
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [":"],
+            "commands": [
+                "workbench.action.showCommands",
+            ]
+        },
+        // indent
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+        // bookmarks
+         {
+             "before": ["<leader>", "m"],
+             "commands": [
+                 "bookmarks.toggle"
+             ]
+         }, {
+             "before": ["<leader>", "b"],
+             "commands": [
+                 "bookmarks.list"
+             ]
+         },
+    ]
+
+    //"vim.handleKeys": {
+    //    "<C-w>": false
+    //}
+}
