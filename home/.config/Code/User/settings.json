@@ -16,15 +16,18 @@
         "<C-a>": false,
         "<C-f>": false
     },
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 0,
     "files.associations": {
         "*.toml": "toml"
     },
     "[toml]": {},
-    "editor.folding": false,
+    "editor.folding": true,
+    "editor.showFoldingControls": "mouseover",
+    "vim.foldfix": true,
     "vs-kubernetes": {
         "vs-kubernetes.helm-path": "/Users/pmichalec/.vs-kubernetes/tools/helm/darwin-amd64/helm",
-        "vs-kubernetes.draft-path": "/Users/pmichalec/.vs-kubernetes/tools/draft/darwin-amd64/draft"
+        "vs-kubernetes.draft-path": "/Users/pmichalec/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+        "vs-kubernetes.minikube-path": "/Users/pmichalec/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
     "editor.insertSpaces": true,
     "editor.renderWhitespace": "boundary",
@@ -95,8 +98,8 @@
             "commands": [
                 "editor.action.indentLines"
             ]
-        },
-        {
+        },{
+
             "before": [
                 "<"
             ],
@@ -116,7 +119,16 @@
                  "bookmarks.list"
              ]
          },
-    ]
+    ],
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": true
+    },
+    "[cue]": {
+
+    },
+    "[jsonnet]": {
+
+    }
 
     //"vim.handleKeys": {
     //    "<C-w>": false

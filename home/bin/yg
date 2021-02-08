@@ -24,13 +24,16 @@ export PATH=$PATH:$GOPATH/bin
 # with go yaml2json
 if [ command -v yaml2json &>/dev/null ]; then
   if [ command -v go ]; then
+    pushd $GOPATH
     go get github.com/bronze1man/yaml2json
+    popd
     pushd $GOPATH/src/github.com/bronze1man/yaml2json
+    go build
     go install
     popd
   else
-    echo "First install github.com/bronze1man/yaml2json"
+    echo "First install github.com/bronze1man/yaml2json" > /dev/stderr
   fi
 fi
 
-for i in $(find . -name "*.yml"); do echo $i; cat $i | yaml2json | jq -e "..|${PATTERN}| select(.!=null)" || printf '\e[A\e[K'; done
+for i in $(find . -iregex ".*\.[yaml]*$"); do echo $i > /dev/stderr ; cat $i | yaml2json | jq -e "..|${PATTERN}| select(.!=null)" || printf '\e[A\e[K'; done
