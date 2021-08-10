@@ -16,7 +16,6 @@
         "<C-a>": false,
         "<C-f>": false
     },
-    "window.zoomLevel": 0,
     "files.associations": {
         "*.toml": "toml"
     },
@@ -27,7 +26,8 @@
     "vs-kubernetes": {
         "vs-kubernetes.helm-path": "/Users/pmichalec/.vs-kubernetes/tools/helm/darwin-amd64/helm",
         "vs-kubernetes.draft-path": "/Users/pmichalec/.vs-kubernetes/tools/draft/darwin-amd64/draft",
-        "vs-kubernetes.minikube-path": "/Users/pmichalec/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+        "vs-kubernetes.minikube-path": "/Users/pmichalec/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vscode-kubernetes.minikube-path.mac": "/Users/pmichalec/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
     },
     "editor.insertSpaces": true,
     "editor.renderWhitespace": "boundary",
@@ -128,7 +128,13 @@
     },
     "[jsonnet]": {
 
-    }
+    },
+    "explorer.confirmDragAndDrop": false,
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "redhat.telemetry.enabled": false
 
     //"vim.handleKeys": {
     //    "<C-w>": false
