@@ -134,7 +134,8 @@
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter-notebook"
     },
-    "redhat.telemetry.enabled": false
+    "redhat.telemetry.enabled": false,
+    "explorer.confirmDelete": false
 
     //"vim.handleKeys": {
     //    "<C-w>": false
