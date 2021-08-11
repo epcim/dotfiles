@@ -14,7 +14,7 @@
 ## Bootstrap
 
 # minimal sw
-brew install git gitbatch zsh homeshick starship fzf curl wget croc keepassxc bash
+brew install git gitbatch zsh homeshick starship fzf curl wget croc keepassxc bash openssh
 
 # homeshick
 which homeshick || {
@@ -43,14 +43,14 @@ homeshick link dotvim
 curl https://raw.githubusercontent.com/rupa/z/master/z.sh -o ~/bin/z.sh
 chmod u+x ~/bin/z.sh
 
+# nerd fonts
+# https://www.nerdfonts.com/font-downloads
+brew tap homebrew/cask-fonts &&
+brew install --cask font-hack-nerd-font
 
-# # powerline 10k
-# see https://github.com/romkatv/powerlevel10k
+
+# # powerline symbols (deprecated, replaced by nerd fonts)
 #
-# # powerline 9k
-# brew tap sambadevi/powerlevel9k
-# brew install powerlevel9k
-# # echo "source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
 # cd Downloads
 # wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
 # wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
@@ -58,13 +58,24 @@ chmod u+x ~/bin/z.sh
 # mkdir -p $FO_DIR || true
 # test -e  $FO_DIR/PowerlineSymbols.otf ||\
 #   mv PowerlineSymbols.otf $FO_DIR
-# fc-cache -vf 
+# fc-cache -vf  || true
 # FC_DIR=~/.config/fontconfig/conf.d/
 # mkdir -p $FC_DIR || true
 # test -e  $FC_DIR/10-powerline-symbols.conf ||\
 #   mv 10-powerline-symbols.conf $FC_DIR
-# fc-cache -vf 
+# fc-cache -vf  || true
 # cd ~
+
+
+# powerline (deprecated, replaced by starshipt prompt)
+#
+# # powerline 10k
+# see https://github.com/romkatv/powerlevel10k
+#
+# # powerline 9k
+# brew tap sambadevi/powerlevel9k
+# brew install powerlevel9k
+# # echo "source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme" >> ~/.zshrc
 
 
 ####
@@ -183,4 +194,8 @@ brew install watch
 test -e ~/bin-osxoverride ||\
   mkdir ~/bin-osxoverride
 for i in $(ls /usr/local/bin/g*) ;do N=$(basename ${i/g//}); ln -sf $i ~/bin-osxoverride/$N; done
+
+
+# nerd fonts (all)
+brew search nerd-font |grep font | xargs -n1 brew install
 
