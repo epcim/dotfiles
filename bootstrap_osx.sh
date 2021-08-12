@@ -169,6 +169,12 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
+# SloopyFocus
+# osascript -e 'id of app "Finder"'
+defaults write com.apple.Terminal FocusFollowsMouse -bool true
+defaults write net.kovidgoyal.kitty FocusFollowsMouse -bool true
+
+
 # SystemPref/Privacy, enable terminal app FullDiskAccess
 sudo systemsetup -setremotelogin on
 
@@ -198,4 +204,5 @@ for i in $(ls /usr/local/bin/g*) ;do N=$(basename ${i/g//}); ln -sf $i ~/bin-osx
 
 # nerd fonts (all)
 brew search nerd-font |grep font | xargs -n1 brew install
+
 
