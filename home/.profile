@@ -47,7 +47,7 @@ which thefuck >/dev/null && eval "$(thefuck --alias f)"
 [[ $(hostname) =~ (dontpanic|C02FN35LMD6R) ]] && true ||  exit 0
 
 # SSH
-export SSH_KEY_PATH="~/.ssh/id_rsa" # : delimited
+export SSH_KEY_PATH="~/.ssh/${USER}_rsa:~/.ssh/${USER}_ed25519:~/.ssh/epcim_rsa:~/.ssh/epcim_ed25519" # : delimited
 if [ -z $SSH_AUTH_SOCK ] ; then
   S=(  /run/user/$(id -u)/ssh-agent.socket
        /run/user/$(id -u)/openssh_agent
