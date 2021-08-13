@@ -16,3 +16,9 @@ rgit() {
 rgitbackup() {
   tar czvf rgit-backup-$(date '+%Y-%m-%d').tgz $(rgitconfigs) ;\
 }
+
+# backup all content required, but not part of the repository
+rgitbackupPrivate() {
+  tar czvf rgitbackupPrivate-$(date '+%Y-%m-%d').tgz \
+    $(find $1 -name PRIVATE.md -o -name PRIVATE -o -name .envrc)
+}
