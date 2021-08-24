@@ -35,16 +35,16 @@ export PATH="$HOME/bin-osxoverride:$PATH"
 # user
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/opt/bin:$PATH"
 
-# prompt
+
+
+####
+## BREAK THE RULES, lazy user flavors below, user teminal only
+
+[[ $(basename $SHELL) == "sh" ]] && exit 0 || true
+
 which starship >/dev/null && eval "$(starship init $SHELL)"
 which thefuck >/dev/null && eval "$(thefuck --alias f)"
 #which thefuck >/dev/null && eval "$(thefuck --alias f --enable-experimental-instant-mode)"
-
-####
-## BREAK THE RULES, lazy user flavor below
-
-[[ $(basename $SHELL) != "zsh" ]] && exit 0 || true
-[[ $(hostname) =~ (dontpanic|C02FN35LMD6R) ]] && true ||  exit 0
 
 # SSH
 export SSH_KEY_PATH="~/.ssh/${USER}_rsa:~/.ssh/${USER}_ed25519:~/.ssh/epcim_rsa:~/.ssh/epcim_ed25519" # : delimited

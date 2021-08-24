@@ -14,7 +14,7 @@
 ## Bootstrap
 
 # minimal sw
-brew install git gitbatch zsh homeshick starship fzf curl wget croc keepassxc bash openssh
+brew install git gitbatch zsh homeshick starship fzf curl wget keepassxc bash openssh bat
 
 # homeshick
 which homeshick || {
