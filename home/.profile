@@ -83,6 +83,7 @@ export PATH="${GOROOT//://bin:}/bin:$PATH"
 
 
 # Python
+export PYENV_ROOT=~/.pyenv
 sourcePyenv() {
   PYENV=$(which pyenv)
   [[ -e $PYENV ]] && {
