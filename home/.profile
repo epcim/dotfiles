@@ -36,6 +36,7 @@ export PATH="$HOME/bin-osxoverride:$PATH"
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/opt/bin:$PATH"
 
 
+export XDG_CONFIG_HOME=~/.config
 
 ####
 ## BREAK THE RULES, lazy user flavors below, user teminal only

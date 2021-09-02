@@ -1,0 +1,5 @@
+
+
+# SHORTCUTS
+export F5="~/Workspace/f5"
+export CDPATH="$F5::$CDPATH"
