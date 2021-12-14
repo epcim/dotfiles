@@ -3,3 +3,10 @@
 # SHORTCUTS
 export F5="~/Workspace/f5"
 export CDPATH="$F5::$CDPATH"
+
+
+# binutils
+export PATH="/usr/local/opt/binutils/bin:$PATH"
+# For compilers to find binutils you may need to set:
+#export LDFLAGS="-L/usr/local/opt/binutils/lib"
+#export CPPFLAGS="-I/usr/local/opt/binutils/include"

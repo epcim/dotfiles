@@ -169,11 +169,21 @@ defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
 defaults write com.microsoft.VSCodeInsiders ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
-# SloopyFocus
+# SloopyFocus (wont work for me)
 # osascript -e 'id of app "Finder"'
+defaults write com.apple.Finder FocusFollowsMouse -bool true
 defaults write com.apple.Terminal FocusFollowsMouse -bool true
 defaults write net.kovidgoyal.kitty FocusFollowsMouse -bool true
+defaults write com.microsoft.VSCode FocusFollowsMouse -bool true
+defaults write com.apple.x11 wm_ffm -bool true
 
+# Window arangement
+#https://github.com/ianyh/Amethyst
+# brew install --cask amethyst
+#https://github.com/sbmpost/AutoRaise
+# brew tap dimentium/autoraise
+# brew install autoraise
+# brew services start autoraise
 
 # SystemPref/Privacy, enable terminal app FullDiskAccess
 sudo systemsetup -setremotelogin on
@@ -197,6 +207,7 @@ brew install grep
 brew install gzip
 brew install screen
 brew install watch
+brew install util-linux
 test -e ~/bin-osxoverride ||\
   mkdir ~/bin-osxoverride
 for i in $(ls /usr/local/bin/g*) ;do N=$(basename ${i/g//}); ln -sf $i ~/bin-osxoverride/$N; done

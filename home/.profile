@@ -31,10 +31,20 @@ export PATH="$PATH:/usr/bin:/sbin:/usr/sbin:/usr/X11R6/bin"
 # system
 export PATH="/usr/local/bin:/opt/bin:/snap/bin:$PATH"
 # osx fixture
-export PATH="$HOME/bin-osxoverride:$PATH"
+test "$(uname -s)" = "Darwin" && {
+  test -e $HOME/bin-osxoverride && \
+    export PATH="$HOME/bin-osxoverride:$PATH"
+  # util-linux
+  test -e /usr/local/opt/util-linux && {
+    export PATH="/usr/local/opt/util-linux/bin:$PATH"
+    export PATH="/usr/local/opt/util-linux/sbin:$PATH"
+  }
+}
 # user
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/opt/bin:$PATH"
 
+# term
+export TERM=xterm-256color
 
 export XDG_CONFIG_HOME=~/.config
 
