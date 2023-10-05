@@ -1,0 +1,23 @@
+# Usage:
+# chezmoi git pull -- --autostash --rebase && chezmoi diff  
+# chezmoi apply -v
+
+[data]
+    email = p.michalec@f5.com
+
+
+[git]
+    autoCommit = true
+    #autoPush = true
+    commitMessageTemplate = commitMessageTemplate = "{{ promptString \"Commit message\" }}"
+
+encryption = "age"
+[age]
+    identity = "~/.ssh/id_ed25519"
+    #symmetric = true
+    #passphrase = true
+
+    # with age key
+    #identity = "~/.config/chezmoi/age.key"
+    #recipient = ""
+

@@ -1,0 +1,25 @@
+# Usage:
+# chezmoi git pull -- --autostash --rebase && chezmoi diff  
+# chezmoi apply -v
+
+{{- $email := promptStringOnce . "email" "Email address" -}}
+
+[data]
+    email = {{ $email | quote }}
+
+
+[git]
+    autoCommit = true
+    #autoPush = true
+    #commitMessageTemplate = 
+
+encryption = "age"
+#[age]
+    #identity = "~/.ssh/id_ed25519"
+    #symmetric = true
+    #passphrase = true
+
+    # with age key
+    #identity = "~/.config/chezmoi/age.key"
+    #recipient = ""
+
