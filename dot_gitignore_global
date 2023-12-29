@@ -1,0 +1,9 @@
+# Direnv stuff
+.direnv
+.envrc
+
+# my
+2del
+*.secret
+*.private
+
