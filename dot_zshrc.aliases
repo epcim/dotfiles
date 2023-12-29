@@ -1,0 +1,455 @@
+
+###
+# Aliases
+
+# This is the real mess, accumulated over time, FIXME
+
+bindkey '^[^e' expand-alias 
+#
+# It should contain commands to set up aliases,
+alias gdmsw=gdmflexiserver
+alias rm="nocorrect rm -i"
+alias mv="nocorrect mv -i"
+alias df='df -h'
+
+test "$(uname -s)" = "Darwin" && {
+  alias ls='ls -h -G --color'
+  alias l='ls -alh -G'    # bez ll nema smysl zit
+  alias ll='ls -rtalh -G' # by last time modification
+  alias cp="nocorrect cp -i"
+} || {
+  alias ls='ls -h --color=always'
+  alias ll='ls -rtalh --color=always'
+  alias cp="nocorrect cp -i --reflink=auto"
+}
+alias sl=ls
+alias du='du -h'
+alias links='links -g'
+alias ys="sudo yum search"
+#alias ys="sudo yum  --enablerepo='epel' --enablerepo='rpmforge' search"
+#alias ysa="sudo yum --enablerepo='*' search"
+alias yi="sudo yum install -y"
+#alias yi="sudo yum  --enablerepo='epel' --enablerepo='rpmforge' install -y"
+#alias yia="sudo yum --enablerepo='*' install -y"
+alias yum="sudo yum"
+alias aptitude="sudo aptitude"
+alias apt-get="sudo apt"
+alias apt="sudo apt"
+#alias agi="sudo apt-get install"
+alias apt-search="sudo apt-cache search"
+alias asi="sudo apt cache search"
+alias rpm="sudo rpm"
+alias emerge="sudo emerge"
+alias mplayer="mplayer -vo xv -stop-xscreensaver"
+alias emerge-sync='sudo layman -S;emerge --sync; sudo eupdatedb'
+alias cat_kismet_dump='tail -f --lines=+0 `ls -ctr /var/log/kismet/Kismet*.dump| tail -n1`'
+alias solve_mp='sudo ~/bin/solve_mp '
+#alias e='sudo emerge'
+test -e ggrep && alias egrep='ggrep -E'
+alias g='egrep -i'
+#alias ip='sudo ip'
+#alias ifconfig='sudo ifconfig '
+#alias ipconfig='sudo ifconfig '
+alias route='sudo route '
+alias iptables='sudo iptables '
+alias ssh-add='ssh-add < /dev/null'
+#alias ssh="TERM=xterm-256color /usr/bin/ssh" # disabled due yk?
+alias visudo='sudo visudo'
+alias systemctl='sudo systemctl'
+alias journalctl='sudo journalctl'
+alias vi='sudo vi'
+if $(which nvim > /dev/null); then
+  alias vim='nvim'
+  alias vimdiff='nvim -d'
+fi
+#alias scrot='scrot "%Y-%m-%d_$wx$h.png" -e "mv $f ~/shots/$f"'
+alias scrot='scrot "screenshot_`date "+%Y-%m-%d-%H%M"`_$RANDOM.png" -e "mv $f ~/shots/$f"'
+#alias alock='alock -auth md5:hash=9240b8caac65bc6825d1c6e7f7cb1040 -cursor theme -bg shade:color=orange,shade=85'
+#alias xlock='alock'
+alias alock='alock -auth md5:hash=9240b8caac65bc6825d1c6e7f7cb1040 -cursor theme'
+alias vimenc="vim -u ~/.vimrc_encrypted -x"
+alias "rc-${service}"="sudo ${service}"
+alias svi='sudo vi'
+# virtualenv aliases
+alias v.source='. /usr/local/bin/virtualenvwrapper.sh'
+alias v.deactivate='deactivate'
+alias v.mk='mkvirtualenv --no-site-packages'
+alias v.mk_withsitepackages='mkvirtualenv'
+alias v.rm='rmvirtualenv'
+alias v.switch='workon'
+alias v.add2virtualenv='add2virtualenv'
+alias v.cdsitepackages='cdsitepackages'
+alias v.cd='cdvirtualenv'
+alias v.lssitepackages='lssitepackages'
+#git aliases
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+# on branchname id-some-fix (add commit msg "ref #id")
+# alias gc="echo -e \"\n\nref #\$(( \$(git branch --show-current | awk -F- '{ print $1}') + 0))\" > /tmp/gitmessage; git commit \$(gpg --card-status > /dev/null 2>&1 && echo -S)"
+alias gdv='git difftool'
+alias gd='git diff'
+alias ge='git checkout '
+alias gco='git checkout '
+alias gob='git checkout '
+alias gk='gitk --all&'
+alias gx='git-annex'
+alias got='git '
+alias get='git '
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias gh='git log --pretty=tformat:%H |xargs -n1 git show'
+
+
+## git gr (npm install -g git-run)
+alias grd="gr git diff"
+alias grdc="gr git diff --cached"
+alias grs="gr status"
+alias grl="gr git --no-pager log --decorate --graph --oneline -n 3"
+
+## gerrit
+alias gerrit-test='ssh -p 29418 $(git remote -v | sed -e "s,.*@\(.*\):.*,\1,"|egrep gerrit |sort -u) gerrit review --message recheck $(git rev-list origin/master..HEAD)'
+alias gerrit-ok='ssh -p 29418 $(git remote -v | sed -e "s,.*@\(.*\):.*,\1,"|egrep gerrit |sort -u) gerrit review --code-review +1 --message recheck $(git rev-list origin/master..HEAD)'
+alias gerrit-merge='ssh -p 29418 $(git remote -v | sed -e "s,.*@\(.*\):.*,\1,"|egrep gerrit |sort -u) gerrit review --code-review +2 --verified +1 --workflow +1 --submit $(git rev-list origin/master..HEAD)'
+
+## reno
+alias reno-report="reno report --no-show-source 2>/dev/null"
+alias reno-add="reno new --edit"
+alias reno-new="reno new --edit"
+
+alias chrome="google-chrome"
+alias chrome-personal="google-chrome --profile-directory='Personal'"
+
+####################################################
+#homeshick
+alias hs='homeshick'
+alias hst='homeshick track'
+alias hsr='homeshick refresh'
+alias hsc='homeshick check'
+#vagrant
+alias va='vagrant'
+#markdown editor
+#alias md='haroopad'
+alias md='vim "+Goyo 120x90%" '
+
+# bash
+alias ghi='history | egrep $@ '
+alias gha='egrep ~/.*history* -e $@'
+
+#screenshots
+#alias zz='scrot -s'
+alias zz='shutter -s'
+
+
+# less
+function _lesslog(){
+  test -z $1 && dir="" || dir="$1/"
+  less +G $(/bin/ls -t ${dir}*.log)
+}
+alias lesslogs="_lesslog"
+alias lessf="less +G +F"
+
+#grep
+#alias grep="grep --color --directories=recurse --exclude='*~'" # pozor neuzivat k tomu GREP_OPTIONS 
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g CA="2>&1 | cat -A"
+alias -g C='| wc -l'
+alias -g D="DISPLAY=:0.0"
+alias -g DN=/dev/null
+alias -g ED="export DISPLAY=:0.0"
+alias -g EG='|& egrep'
+alias -g EH='|& head'
+alias -g EL='|& less'
+alias -g ELS='|& less -S'
+alias -g ETL='|& tail -20'
+alias -g ET='|& tail'
+alias -g F=' | fmt -'
+alias -g G='| egrep'
+alias -g H='| head'
+alias -g HL='|& head -20'
+alias -g kk="*~(*.bz2|*.gz|*.tgz|*.zip|*.z)"
+alias -g LL="2>&1 | less"
+alias -g L="| less"
+alias -g LS='| less -S'
+alias -g MM='| most'
+alias -g M='| more'
+alias -g NE="2> /dev/null"
+alias -g NS='| sort -n'
+alias -g NUL="> /dev/null 2>&1"
+alias -g PIPE='|'
+alias -g R=' > /c/aaa/tee.txt '
+alias -g RNS='| sort -nr'
+alias -g S='| sort'
+alias -g TL='| tail -20'
+alias -g T='| tail'
+alias -g US='| sort -u'
+alias -g VM='/var/log/messages'
+alias -g X0G='| xargs -0 egrep'
+alias -g X0='| xargs -0'
+alias -g XG='| xargs egrep'
+alias -g X='| xargs'
+
+# cpufreq
+alias cpu-powersafe="sudo cpufreq-set -r -g performance"
+alias cpu-performance="sudo cpufreq-set -r -g powersave"
+
+
+alias mc="LANG=C mc"
+#alias nautilus="nautilus --browser --no-desktop"
+#
+#Chef/kitchen/inspec
+alias knife='nocorrect knife'
+alias chef='nocorrect chef'
+alias kitchen='nocorrect kitchen'
+alias bundle='nocorrect bundle'
+
+#kitchen ci
+#alias k='kitchen'
+alias kt='kitchen test'
+alias kv='kitchen verify'
+alias kl='kitchen list'
+alias kli='kitchen list'
+alias klo='kitchen login'
+alias kd='kitchen destroy'
+alias kc='kitchen converge'
+
+# kitty terminal
+alias icat="kitty +kitten icat"
+
+# bundler
+alias bkc='nocorrect bundle exec kitchen converge'
+alias bkv='nocorrect bundle exec kitchen verify'
+alias bkl='nocorrect bundle exec kitchen login'
+alias be='nocorrect bundle exec'
+alias bk='nocorrect bundle exec kitchen'
+
+# kubernetes kubectl
+alias stern="stern -s5m -n ${KUBE_NS:-${NAMESPACE:-ves-system}} $@"
+alias kluctl='${KLUCTL:-kluctl} --no-update-check'
+alias k9s='nocorrect k9s --refresh 30 -n all'
+# alias kubectl='nocorrect kubectl'
+# kubecltl alias that remember last namespace used
+function k() {
+  ARGS=()
+  while [[ $# -gt 0 ]]; do
+    case $1 in 
+      -n|--namespace)
+        export KUBE_NS="$2"
+        shift; shift
+        ;;
+      *)
+        # positional
+        ARGS+=("$1")
+        shift
+        ;;
+    esac
+  done
+  if [[ -n "$KUBE_NS" ]]; then
+    nocorrect kubectl --namespace=${KUBE_NS} $ARGS
+  else
+    nocorrect kubectl $ARGS
+  fi
+}
+alias kgp='k get pods -A'
+alias kgq='k get quota'
+alias kge='k get events --sort-by=".lastTimestamp"'
+#
+function kga {
+  local ALL="$(kubectl api-resources --verbs=list --namespaced -o name |\
+    grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq)"
+  for i in $ALL; do
+    echo "Resource:" $i
+    kubectl get --ignore-not-found ${i} -n $@
+  done
+}
+
+#ruby
+#alias gem="sudo gem"
+alias be="bundle exec"
+
+#programming
+#which ack || alias ack="ack-grep"
+#alias tasks='grep --exclude-dir=.git --exclude-dir=.hg --exclude-dir=.svn -rEI "TODO|FIXME|TBD|GRRR|HACK" . 2>/dev/null '
+
+# gist
+alias gistAdd="gist -co"
+function gistSearch(){
+  gist -l epcim|egrep $@
+}
+alias gistOnline="echo 'https://gist.github.com/search?utf8=%E2%9C%93&ref=searchresults&q=user%3Aepcim+'"
+alias urlize="sed 's/ /%20/g'"
+
+
+
+# utilization
+function psg() {
+  ps -ax | grep $* | grep -v grep
+}
+
+
+# beepme
+alias bs='beepme'
+alias bf='beepme fail'
+
+
+# direnv
+which direnv >/dev/null && eval "$(direnv hook zsh)" || true
+
+# cat with colors and git integration
+which bat >/dev/null && {
+  #alias cat="bat $*"
+  #alias cat0="/bin/cat $*" # for cases when you need plain `cat`
+  test -z "$@" && FORCELANG="-l yaml"
+  alias less="bat $FORCELANG $@"
+  alias less0="/bin/less $*" # for cases when you need plain `less`
+}
+
+# readme
+alias readme='find . .. ../.. ../../.. -name "README*" -o -name "readme*" -o -name "Readme*" -maxdepth 1 | head -n1 | xargs -n1 bat'
+alias rdm=readme
+
+# diff
+batdiff() {
+    git diff --name-only --diff-filter=d | xargs bat --diff
+}
+
+
+# cli file manager
+# https://github.com/jarun/nnn
+alias n="LC_COLLATE=C nnn -e"
+alias nnn="nnn -e"
+
+# kapitan
+alias kapitan="docker run -t --rm -v $(pwd):/src:delegated deepmind/kapitan"
+
+# git typo fix
+function gi(){
+  # to fix "gi tpush" etc..
+  [[ "$1" =~ ^t ]] && {
+    # strip first t from arg
+    git ${@/t/}
+  } || {
+    echo "not impl."
+  }
+}
+
+
+
+# shortcuts
+function fzf-vim() {
+  vim $(find . -maxdepth 6 |fzf)
+}
+zle -N fzf-vim
+bindkey -M viins '^E' fzf-vim
+
+
+# trimnew line chars
+function trimnewline() {
+  mv -f $1 $1.tmp; tr -d 'n' < $1.tmp > $1; rm -f $1.tmp
+}
+
+# yubikey
+function yk() {
+  [[ ! -z "$SSH_AGENT_PID_YK" ]] || ykssh-agent
+  export SSH_AGENT_PID="$SSH_AGENT_PID_YK"
+  export SSH_AUTH_SOCK="$SSH_AUTH_SOCK_YK"
+  $@
+}
+
+# function ykssh() {
+#    [[ ! -z "$SSH_AGENT_PID_YK" ]] || ykssh-agent
+#    yk ssh $@
+# }
+
+function ykssh-agent() {
+
+  # allow other actions -k to kill etc..
+  [[ "$@" == "" ]] && {
+    ykssh-agent-init 
+  } || {
+    yk ssh-agent $@; 
+  }
+}
+
+function ykssh-agent-init() {
+	local ssh_auth_sock=${SSH_AUTH_SOCK}
+	local ssh_agent_pid=${SSH_AGENT_PID}
+
+  # whitelist PKCS#11 provider and add keys
+  test "$(uname -s)" = "Darwin" && {
+    local YPTV=$(yubico-piv-tool --version |awk '{print $2}')
+    eval $(ssh-agent -s -P "/usr/local/lib/*,/usr/local/Cellar/yubico-piv-tool/$YPTV/lib/libykcs11.$YPTV.dylib"|grep -v echo)
+    ssh-add -s /usr/local/Cellar/yubico-piv-tool/$YPTV/lib/libykcs11.$YPTV.dylib
+  } || {
+    eval $(ssh-agent | grep -v echo)
+    ssh-add -s /usr/lib/x86_64-linux-gnu/libykcs11.so
+  }
+
+	export SSH_AUTH_SOCK_YK="${SSH_AUTH_SOCK}"
+	export SSH_AGENT_PID_YK="${SSH_AGENT_PID}"
+	export SSH_AUTH_SOCK="${ssh_auth_sock}"
+	export SSH_AGENT_PID="${ssh_agent_pid}"
+  ln -sf $SSH_AUTH_SOCK_YK $HOME/.ssh/.yubikey.sock
+}
+
+function dirdiff()
+{
+    # Shell-escape each path:
+    # $1 - reference dir base
+    # $2 - sub. path from cwd
+    RDB=$(printf '%q' "${1}"); shift
+    PTH=$(printf '%q' "${1}"); shift
+    vim $@ -c "DirDiff $RDB/$PTH ${PTH:-./}"
+}
+
+
+function gitCommitSlug() {
+  git log -1 --pretty=%B |sed -e 's,[. :,\/"\\()\*], ,g' -e 's/ ./\U&/g' -e 's/ //g'|cut -c 1-35|head -n1
+}
+
+function gitBranchSlug() {
+  B=$(git branch --show-current |sed -e 's,[. :,\/"\\()\*], ,g' -e 's/ ./\U&/g' -e 's/ //g'|cut -c 1-35)
+  [[ "$B" =~ (main|master) ]] && gitCommitSlug || echo "$B"
+}
+
+
+
+# GET TOOLS
+alias getcertigo="wget -O /opt/bin/certigo https://github.com/square/certigo/releases/download/v1.16.0/certigo-linux-amd64; chmod +x /opt/bin/certigo"
+alias getcroc="CROC_VERSION=\$(curl --silent https://api.github.com/repos/schollz/croc/releases/latest | grep -Po '\"tag_name\": \"v\K.*?(?=\")'); echo \"Using croc version \${CROC_VERSION}\"; curl -L https://github.com/schollz/croc/releases/download/v\${CROC_VERSION}/croc_\${CROC_VERSION}_Linux-64bit.tar.gz | tar -C /opt/bin/ -xvz croc; chmod +x /opt/bin/croc"
+alias getjq="curl -L https://github.com/itchyny/gojq/releases/download/v0.12.9/gojq_v0.12.9_linux_amd64.tar.gz | tar -C /tmp/ -xvz gojq_v0.12.9_linux_amd64/gojq; mv /tmp/gojq_v0.12.9_linux_amd64/gojq /opt/bin/jq; chmod +x /opt/bin/jq"
+alias getk9s="curl -L https://github.com/derailed/k9s/releases/download/v0.26.7/k9s_Linux_x86_64.tar.gz | tar -C /opt/bin -xvz k9s"
+alias gettmate="curl -L https://github.com/tmate-io/tmate/releases/download/2.4.0/tmate-2.4.0-static-linux-amd64.tar.xz | tar -C /opt/bin --strip-components=1 -xvJf -"
+alias getnnn="curl -L https://github.com/jarun/nnn/releases/download/v4.7/nnn-static-4.l.x86_64.tar.gz  | tar -C /opt/bin -xvz nnn-static; mv /opt/bin/nnn-static /opt/bin/nnn"
+alias getstern="curl -L https://github.com/stern/stern/releases/download/v1.22.0/stern_1.22.0_linux_amd64.tar.gz | tar -C /opt/bin -xvz stern"
+
+
+# K8s related shortcuts
+function klogs {  d=$1;  docker logs $(docker ps |grep "k8s_$d" | awk '{print $1}'); }
+function kshell {  d=$1;  docker exec -it $(docker ps |grep "k8s_$d" | awk '{print $1}') /bin/bash; }
+function krestart {  d=$1;  docker restart $(docker ps |grep "k8s_$d" | awk '{print $1}'); }
+
+
+
+# https://www.smashingmagazine.com/2015/06/efficient-image-resizing-with-imagemagick/
+# https://www.imagemagick.org/script/command-line-options.php
+# https://www.imagemagick.org/script/command-line-processing.php#geometry
+function smartresize() {
+  # POSTERIZE="-posterize 136"
+  # STRIP="-strip"
+  mogrify -path $3 -filter Triangle -define filter:support=2 -thumbnail $2 -unsharp 0.25x0.08+8.3+0.045 -dither None $POSTERIZE -quality ${QUALITY:-82} -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none $STRIP -colorspace sRGB $1
+}
+function gmsmartresize() { 
+  # POSTERIZE="-posterize 136"
+  # STRIP="-strip"
+  gm mogrify -filter Triangle -define filter:support=2 -thumbnail $2 -unsharp 0.25x0.08+8.3+0.045 -dither -quality ${QUALITY:-82} -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none $STRIP -output-directory $3 $1 
+}
+function photoresize() {
+  # cant use -thumbnail to keep metadata, but files are bigger
+  # $2 as 200x200 or as`maximum area` 400@
+  mogrify -path $3 -filter Triangle -define filter:support=2 -resize $2 -unsharp 0.25x0.08+8.3+0.045 -dither None -quality ${QUALITY:-82} -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB $1
+}
+
+

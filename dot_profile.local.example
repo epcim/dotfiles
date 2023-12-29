@@ -1,7 +1,7 @@
 
 
 # profile overrides
-#export FLAVOR=""
+#export FLAVOR="$HOSTNAME"
 
 # SHORTCUTS
 export WORK="~/Workspace/$FLAVOR"

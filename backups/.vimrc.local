@@ -1,0 +1,185 @@
+
+" .vimrc.local
+
+" Install plugins in ~/.config/nvim/local_bundles.vim
+"" Yaml
+"Plug 'stephpy/vim-yaml' "Yaml faster
+
+"" Undo
+"Plug 'sjl/gundo.vim'
+
+"" Terraform
+"Plug 'hashivim/vim-terraform'
+let g:terraform_align=1
+let g:terraform_fold_sections=1
+let g:terraform_remap_spacebar=1
+
+
+"" Go
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'roxma/nvim-yarp'
+"Plug 'roxma/vim-hug-neovim-rpc'
+let g:deoplete#enable_at_startup = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+au FileType go nmap <Leader>s <Plug>(go-implements)
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
+au FileType go nmap <leader>co <Plug>(go-coverage)
+
+
+" Yggdroot/indentLine
+" ..function 104_Setup[6]..104_IndentLinesEnable[10]
+let g:indentLine_concealcursor = 'nc'
+
+"" Python
+"if has('python3')
+"    let g:gundo_prefer_python3 = 1
+"endif
+"let g:python3_host_prog = expand('~/.pyenv/versions/`pyenv global`/bin/python')
+
+
+"" Writing
+" Plug 'junegunn/goyo.vim' " Distraction-free writing in Vim
+
+
+"" Dirdiff
+"Plug 'will133/vim-dirdiff'
+let g:DirDiffEnableMappings = 1
+let g:DirDiffExcludes = ".git,system,CVS,*.class,*.exe,.*.swp,pbgo*,pbdoc*,pbswagger*,pbccp*"
+let g:DirDiffIgnore = "sb-mec-trial,prod,.build,.repos,.tools"
+" Diff collors, fixture
+hi DiffText   cterm=none ctermfg=Black ctermbg=Red gui=none guifg=Black guibg=Red
+hi DiffChange cterm=none ctermfg=Black ctermbg=LightMagenta gui=none guifg=Black guibg=LightMagenta
+if &diff
+  set diffopt+=iwhite
+endif
+
+"" OSX
+"set clipboard+=unnamed   "Mac OSX
+
+
+"" NerdTree
+"let NERDTreeQuitOnOpen=0        " keep NERDTree opened
+"let NERDTreeWinSize=25          " panel width
+"set autowrite
+"map <C-e> <plug>NERDTreeTabsToggle<CR>
+"map <leader>e :NERDTreeFind<CR>
+"nmap <leader>nt :NERDTreeFind<CR>
+"let NERDTreeShowBookmarks=1
+"let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+"let NERDTreeChDirMode=0
+"let NERDTreeQuitOnOpen=1
+"let NERDTreeMouseMode=2
+"let NERDTreeShowHidden=1
+"let NERDTreeKeepTreeInNewTab=1
+"let g:nerdtree_tabs_open_on_gui_startup=0
+"let NERDTreeShowBookmarks=1
+
+
+"" Jsonnet
+function! s:fmtAutosave()
+  " Jsonnet code formatting on save
+  if get(g:, "jsonnet_fmt_on_save", 1)
+    call jsonnet#Format()
+  endif
+endfunction
+" auto group and clear inside prevents multiple registration of the same
+" auto commands
+augroup vim-jsonnet
+  autocmd!
+   autocmd BufReadPre *.jsonnet setlocal foldmethod=syntax
+   autocmd BufReadPre *.libsonnet setlocal foldmethod=syntax
+   autocmd BufReadPre *.jsonnet setlocal foldlevel=100
+   autocmd BufReadPre *.libsonnet setlocal foldlevel=100
+   autocmd BufWritePre *.jsonnet call s:fmtAutosave()
+   autocmd BufWritePre *.libsonnet call s:fmtAutosave()
+augroup END
+
+
+"" GIT
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
+nnoremap <silent> <leader>gc :Gcommit<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gl :Glog<CR>
+nnoremap <silent> <leader>gp :Git push<CR>
+nnoremap <silent> <leader>gr :Gread<CR>
+nnoremap <silent> <leader>gw :Gwrite<CR>
+nnoremap <silent> <leader>ge :Gedit<CR>
+" Mnemonic _i_nteractive
+nnoremap <silent> <leader>gi :Git add -p %<CR>
+nnoremap <silent> <leader>gg :SignifyToggle<CR>
+
+"" Colors
+"if has('gui_running')
+"    set background=light
+"else
+"    set background=dark
+"endif
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+"set termguicolors
+
+"" Airline
+let g:airline#extensions#whitespace#checks = []
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1
+
+" Tabularize
+"Plug 'junegunn/tabularize'
+nmap <Leader>a& :Tabularize /&<CR>
+vmap <Leader>a& :Tabularize /&<CR>
+nmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+vmap <Leader>a= :Tabularize /^[^=]*\zs=<CR>
+nmap <Leader>a=> :Tabularize /=><CR>
+vmap <Leader>a=> :Tabularize /=><CR>
+nmap <Leader>a: :Tabularize /:<CR>
+vmap <Leader>a: :Tabularize /:<CR>
+nmap <Leader>a:: :Tabularize /:\zs<CR>
+vmap <Leader>a:: :Tabularize /:\zs<CR>
+nmap <Leader>a, :Tabularize /,<CR>
+vmap <Leader>a, :Tabularize /,<CR>
+nmap <Leader>a,, :Tabularize /,\zs<CR>
+vmap <Leader>a,, :Tabularize /,\zs<CR>
+nmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+vmap <Leader>a<Bar> :Tabularize /<Bar><CR>
+
+" Stupid shift key fixes
+if !exists('g:spf13_no_keyfixes')
+    if has("user_commands")
+        command! -bang -nargs=* -complete=file E e<bang> <args>
+        command! -bang -nargs=* -complete=file W w<bang> <args>
+        command! -bang -nargs=* -complete=file Wq wq<bang> <args>
+        command! -bang -nargs=* -complete=file WQ wq<bang> <args>
+        command! -bang Wa wa<bang>
+        command! -bang WA wa<bang>
+        command! -bang Q q<bang>
+        command! -bang QA qa<bang>
+        command! -bang Qa qa<bang>
+    endif
+
+    cmap Tabe tabe
+endif
+
+"" fzf
+set rtp+=~/usr/local/bin/fzf
+
+
+" Ale
+" Set this in your vimrc file to disabling highlighting
+" let g:ale_set_highlights = 0
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+let g:ale_echo_msg_format = ''
+

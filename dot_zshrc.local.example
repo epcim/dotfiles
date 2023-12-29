@@ -1,0 +1,59 @@
+
+# aliases
+if [ ! -z "$PS1" ]; then
+  #echo This shell is not interactive
+  alias cat="bat -p"
+fi
+
+
+# zsh
+precmd () { 
+  # change kitty/terminal title to current $ENV or directory path relative to $HOME
+  TERM_TITLE=${(U)ENV:-${(U)AWS_PROFILE:-$(basename ${(U)KUBECONFIG:-""})}}
+  TERM_TITLE=${TERM_TITLE:-$(realpath -sL --relative-base=$HOME $PWD)}
+  print -Pn "\e]0;${TERM_TITLE//.Y*ML/}\a"
+}
+
+# VSCODE
+[[ "$(uname -s)" = "Darwin" ]] &&\
+  alias code="/Applications/Visual\ Studio\ Code.app/Contents/MacOS/Electron"
+
+# CD PATHS 
+export CDPATH="$WORK:$CDPATH"
+
+# DOCKER (on OSX)
+# https://github.com/abiosoft/colima
+# brew install colima docker nerdtree kubectl
+# colima start
+# colima start --runtime containerd
+# colima start --with-kubernetes
+# colima nerdctl install
+
+# GO
+export PATH="/usr/local/opt/go@1.18/bin:$PATH"
+export GOPATH=$HOME/go
+#export GOROOT=$HOME/go/src
+export GOPRIVATE=github.com/epcim/*
+
+
+## ssh
+test -e ~/.ssh/config.d &&\
+  find ~/.ssh/config.d -name "aliases.sh" | xargs -rn1 source
+
+
+
+
+
+
+# brew
+export HOMEBREW_NO_AUTO_UPDATE=1
+#export HOMEBREW_AUTO_UPDATE_SECS=604800  # 1 week
+export HOMEBREW_AUTO_UPDATE_SECS=1814400  # 3 weeks
+
+# term
+export TERM=xterm-256color
+
+
+
+
+

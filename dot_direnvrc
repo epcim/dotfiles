@@ -1,0 +1,23 @@
+
+layout_golang() {
+  #export GOPATH=$PWD:$PWD/vendor:$GOPATH
+  #export GOPATH=$PWD
+
+  PATH_add "$PWD/bin"
+  PATH_add "$PWD/vendor/bin"
+  PATH_add bin
+}
+
+layout_epcim() {
+  export GIT_AUTHOR_EMAIL=epcim@apealive.net
+  export GIT_AUTHOR_NAME=Petr Michalec
+  export GIT_COMMITTER_EMAIL=epcim@apealive.net
+  export GIT_COMMITTER_NAME=Petr Michalec
+}
+
+layout_volterra() {
+  export GIT_AUTHOR_EMAIL=pmichalec@ves.io
+  export GIT_AUTHOR_NAME=Petr Michalec
+  export GIT_COMMITTER_EMAIL=pmichalec@ves.io
+  export GIT_COMMITTER_NAME=Petr Michalec
+}
