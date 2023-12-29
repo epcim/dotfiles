@@ -1,0 +1,36 @@
+Host *
+  TCPKeepAlive yes
+  ServerAliveInterval 60
+  #This allows anyone to connect to the forwarded ports. If the server is on the public Internet, anyone on the Internet can connect to the port.
+  #GatewayPorts yes
+  #GatewayPorts clientspecified
+  StrictHostKeyChecking yes
+  ForwardAgent no
+  SetEnv TERM=xterm
+  RequestTTY yes
+  #RemoteCommand TERM=xterm $SHELL
+  RemoteCommand bash -o vi
+
+# PRIVATE NETWORKS
+Host 172.16.*
+  #IdentitiesOnly yes
+  StrictHostKeyChecking no
+  ForwardAgent no
+
+Host 192.168.*
+  #IdentitiesOnly yes
+  StrictHostKeyChecking no
+  ForwardAgent no
+
+Host 10.*
+  #IdentitiesOnly yes
+  StrictHostKeyChecking no
+  ForwardAgent no
+
+# Host example
+#   HostName 10.98.9.185
+#   User dev
+#   StrictHostKeyChecking no
+#   LogLevel error
+#   ConnectionAttempts=6
+#   ConnectTimeout=5
