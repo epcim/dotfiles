@@ -1,0 +1,13 @@
+[whitelist]
+prefix = [
+  "~/Workspace/github/epcim",
+  "~/Workspace/github/apealive",
+  "~/Workspace/gitlab/epcim",
+  "~/Workspace/gitlab-volterra",
+  "~/Workspace/gitlab-f5",
+  "~/go/src/gopkg.volterra.us",
+  "~/go/src/github.com/epcim",
+  "~/go/src/github.com/apealive",
+  "~/p.michalec/Sync"
+  ]
+exact = [ ]
