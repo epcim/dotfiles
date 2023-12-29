@@ -5,31 +5,48 @@
     url = "https://github.com/FiloSottile/age/releases/download/v{{ $ageVersion }}/age-v{{ $ageVersion }}-{{ .chezmoi.os }}-{{ .chezmoi.arch }}.tar.gz"
     path = "age/age"
 
-# neovim (lazy, astro)
-
-
-# DEPRECATED
+# DEPRECATED, zsh->fish, nvim->nvim.astroVim
 # zsh
-[".oh-my-zsh"]
-    type = "archive"
-    url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
-    exact = true
-    stripComponents = 1
-    refreshPeriod = "168h"
-[".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
-    type = "archive"
-    url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
-    exact = true
-    stripComponents = 1
-    refreshPeriod = "168h"
-[".oh-my-zsh/custom/themes/powerlevel10k"]
-    type = "archive"
-    url = "https://github.com/romkatv/powerlevel10k/archive/v1.15.0.tar.gz"
-    exact = true
-    stripComponents = 1
-
+# [".oh-my-zsh"]
+#     type = "archive"
+#     url = "https://github.com/ohmyzsh/ohmyzsh/archive/master.tar.gz"
+#     exact = true
+#     stripComponents = 1
+#     refreshPeriod = "168h"
+# [".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"]
+#     type = "archive"
+#     url = "https://github.com/zsh-users/zsh-syntax-highlighting/archive/master.tar.gz"
+#     exact = true
+#     stripComponents = 1
+#     refreshPeriod = "168h"
+# [".oh-my-zsh/custom/themes/powerlevel10k"]
+#     type = "archive"
+#     url = "https://github.com/romkatv/powerlevel10k/archive/v1.15.0.tar.gz"
+#     exact = true
+#     stripComponents = 1
 # vim Plug manager
-[".vim/autoload/plug.vim"]
-    type = "file"
-    url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+# [".vim/autoload/plug.vim"]
+#     type = "file"
+#     url = "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+#     refreshPeriod = "168h"
+
+{{ $gitWksVersion := "1.2.1" -}}
+["bin/git-workspace"]
+    type = "archive-file"
+    url = "https://github.com/orf/git-workspace/releases/download/v{{ $gitWksVersion }}/git-workspace-{{if eq .chezmoi.os "darwin"}}Darwin{{else}}Linux{{end}}-x86_64.tar.gz"
+    path = "git-workspace"
+
+# neovim (lazy, astro)
+["~/.config/nvim.astro/lua/user"]
+    type = "git-repo"
+    url = "https://github.com/epcim/astronvim_config.git"
     refreshPeriod = "168h"
+
+["~/.config/nvim.astro"]
+    type = "archive"
+    url = "https://github.com/AstroNvim/AstroNvim/archive/main.tar.gz"
+    #exact = true
+    stripComponents = 1
+    refreshPeriod = "168h"
+    #include = ["*/*.zsh"]
+    exclude = ["*/.github", "*/lua/user/*"]

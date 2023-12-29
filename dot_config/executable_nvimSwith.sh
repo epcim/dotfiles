@@ -13,3 +13,4 @@ mv -f ~/.local/share/nvim ~/.local/share/nvim.bak
 mv -f ~/.local/state/nvim ~/.local/state/nvim.bak
 mv -f ~/.cache/nvim ~/.cache/nvim.bak
 
+#
