@@ -1,0 +1,74 @@
+
+# Global config
+# See:
+# ~/.config/git/config
+
+# Personal config
+
+[user]
+	name = Petr Michalec
+  email = {{ .email }}
+  #signingkey = 86A419AE721D52BDBD2293175B8DB74408F9296A
+  signingkey = F3B3C441E1CF2452
+
+
+[commit]
+  gpgsign = true
+
+[http]
+	#proxy=http://michalpe:XXXX@globalproxy.xxx.com:8080
+	#sslCert=/home/pmichalec/**/*.p12
+	sslCertPasswordProtected=true
+	sslVerify = true
+
+[https]
+	sslCertPasswordProtected=true
+	sslverify = true
+
+
+#[init]
+
+#[core]
+
+#[temp]
+
+
+[gpg]
+	program = /usr/local/bin/gpg
+
+[credential]
+	helper = cache --timeout=43200
+
+[pull]
+
+[alias]
+  br    = branch
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+[push]
+
+[diff]
+  color = auto
+  tool = icdiff
+
+[difftool "icdiff"]
+#      cmd = $(pyenv root)/versions/$(pyenv global)/bin/icdiff -r -IF '.*(pbgo|pbdoc|pbswagger|pbcpp|lock)' --strip-trailing-cr --line-numbers $LOCAL $REMOTE
+#      # custom branch: https://github.com/jeffkaufman/icdiff/pull/150
+
+[include]
+  path = ~/.gitconfig.local
+
+[includeIf "file:~/.gitconfig.f5"]
+  path = .gitconfig.f5
+
+[diff "sopsdiffer"]
+	textconv = sops -d
+
+# fix
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+[url "ssh://git@gitlab.com/"]
+  insteadOf = https://gitlab.com/
+
+[init]
+	defaultBranch = main

@@ -2,6 +2,7 @@ README.md
 scripts/
 backups/   # ignore the backups folder, but not its contents
 backups/** # ignore the contents of backups folder but not the folder itself
+age.key
 
 # shell rc's
 #.zshrc.*

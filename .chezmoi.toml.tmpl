@@ -1,32 +1,30 @@
 # Usage:
 # chezmoi git pull -- --autostash --rebase && chezmoi diff  
 # chezmoi apply -v
-
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" }}
 
 
-
 [data]
     email = {{ $email | quote }}
+    shell = {{ $shell | quote }}
 
-[data.features_enabled]
-  age = true
+[data.features]
+  age = false
   gopass = true
   gnutools = false
+
+
+{{- if .data.features.age }}
+encryption = "age"
+{{- end }}
+
+[age]
+    identity = "~/.password-store/.age.key"
+    recipient = "age14t8gu3454w56fvdz5twfuysk8fw5u24n7t95a7yuks07k5nks93syvw5pv"
 
 [git]
     autoCommit = true
     #autoPush = true
     #commitMessageTemplate = 
-
-encryption = "age"
-#[age]
-    #identity = "~/.ssh/id_ed25519"
-    #symmetric = true
-    #passphrase = true
-
-    # with age key
-    #identity = "~/.config/chezmoi/age.key"
-    #recipient = ""
 
