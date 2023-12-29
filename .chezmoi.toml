@@ -3,8 +3,14 @@
 # chezmoi apply -v
 
 [data]
-    email = p.michalec@f5.com
+  email = p.michalec@f5.com
+  shell = zsh
 
+
+[data.features]
+  age = true
+  gopass = false
+  gnutools = true
 
 [git]
     autoCommit = true

@@ -3,10 +3,17 @@
 # chezmoi apply -v
 
 {{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" }}
+
+
 
 [data]
     email = {{ $email | quote }}
 
+[data.features_enabled]
+  age = true
+  gopass = true
+  gnutools = false
 
 [git]
     autoCommit = true

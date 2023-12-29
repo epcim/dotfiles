@@ -1,0 +1,23 @@
+README.md
+scripts/
+backups/   # ignore the backups folder, but not its contents
+backups/** # ignore the contents of backups folder but not the folder itself
+
+# shell rc's
+{{ if ne .shell "zsh" }}
+.zsh*.f5       # ignore zsh configuration files
+{{ end }}
+
+{{ if ne .shell "bash" }}
+.bash*.f5
+{{ end }}
+
+{{ if ne .shell "fish" }}
+.fish*.f5
+{{ end }}
+
+
+# repositories
+{{ if not .features.f5xcReposSre }}
+Work/**
+{{ end }}
