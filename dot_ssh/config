@@ -7,9 +7,6 @@ Host *
   StrictHostKeyChecking yes
   ForwardAgent no
   SetEnv TERM=xterm
-  RequestTTY yes
-  #RemoteCommand TERM=xterm $SHELL
-  RemoteCommand bash -o vi
 
 # PRIVATE NETWORKS
 Host 172.16.*
@@ -34,3 +31,6 @@ Host 10.*
 #   LogLevel error
 #   ConnectionAttempts=6
 #   ConnectTimeout=5
+#
+#   RequestTTY yes
+#   RemoteCommand bash -o vi
