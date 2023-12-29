@@ -1,0 +1,32 @@
+[[provider]]
+provider = "gitlab"
+name = "epcim"
+url = "https://gitlab.com"
+path = "gitlab"
+env_var = "GITLAB_TOKEN"
+exclude = [
+    "volterra.*",
+    "mirantis.*",
+]
+
+[[provider]]
+provider = "github"
+name = "epcim"
+path = "github"
+env_var = "GITHUB_TOKEN"
+skip_forks = false
+
+# [[provider]]
+# provider = "github"
+# name = "apealive"
+# path = "github-apealive"
+# env_var = "GITHUB_TOKEN"
+# skip_forks = false
+
+#[[provider]]
+#provider = "gitea"
+#name = "epcim"
+#path = "gitea"
+#env_var = "GITEA_TOKEN"
+#skip_forks = false
+
