@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #FIXME, dont run this always but on autoUpdate condition
-{{- if contains (getenv "RUN_AFTER) "utils" }}
+{{- if contains (env "RUN_AFTER" ) "utils" }}
 
 ## OSX
 {{- if eq .chezmoi.os "darwin" }}
@@ -10,7 +10,7 @@
   brew install -q \
     jq yq stern gitbatch gopass curl wget ripgrep fd fzf bash bat direnv go-jsonnet just
 
-  {{ if .features.gnutools }}
+  {{ if .install.gnutools }}
   ## GNU first class experience
   export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
   brew install -q \
