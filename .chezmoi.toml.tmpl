@@ -2,22 +2,24 @@
 # chezmoi git pull -- --autostash --rebase && chezmoi diff  
 # chezmoi apply -v
 {{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" }}
-
+{{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" -}}
+{{- $eneng := promptStringOnce . "eneng" "Encryption engine [age]"  }}
 
 [data]
-    email = {{ $email | quote }}
-    shell = {{ $shell | quote }}
+  email = {{ $email | quote }}
+  shell = {{ $shell | quote }}
+  eneng = {{ $eneng | quote }}
 
 [data.features]
-  age = false
+  dummy = false
+
+[data.install]
+  age = {{ eq $eneng "age" }}
   gopass = true
-  gnutools = false
+  gnutools = true # TODO, enable implicit on osx
 
 
-{{- if .data.features.age }}
-encryption = "age"
-{{- end }}
+encryption = {{ $eneng | quote }}
 
 [age]
     identity = "~/.password-store/.age.key"
@@ -26,5 +28,5 @@ encryption = "age"
 [git]
     autoCommit = true
     #autoPush = true
-    #commitMessageTemplate = 
+    commitMessageTemplate = {{ `"{{ promptString \"Commit message\" }}"` }}
 
