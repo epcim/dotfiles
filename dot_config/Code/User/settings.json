@@ -1,0 +1,161 @@
+
+{
+    "diffEditor.ignoreTrimWhitespace": true,
+
+    "vim.enableNeovim" : true,
+    "vim.neovimPath": "/usr/local/bin/nvim",
+
+    "vim.easymotion": true,
+    "vim.sneak": true,
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.leader": "<space>",
+    "vim.handleKeys":{
+        "<C-a>": false,
+        "<C-f>": false
+    },
+    "files.associations": {
+        "*.toml": "toml",
+        "*.y*ml.tmpl": "goyaml",
+        "*.y*ml.tpl": "goyaml",
+        "Kustomize": "yaml",
+        "Kustomization": "yaml"
+    },
+    "[toml]": {},
+    "editor.folding": true,
+    "editor.showFoldingControls": "mouseover",
+    "vim.foldfix": true,
+    "vs-kubernetes": {
+        "vs-kubernetes.helm-path": "/Users/pmichalec/.vs-kubernetes/tools/helm/darwin-amd64/helm",
+        "vs-kubernetes.draft-path": "/Users/pmichalec/.vs-kubernetes/tools/draft/darwin-amd64/draft",
+        "vs-kubernetes.minikube-path": "/Users/pmichalec/.vs-kubernetes/tools/minikube/darwin-amd64/minikube",
+        "vscode-kubernetes.minikube-path.mac": "/Users/pmichalec/.vs-kubernetes/tools/minikube/darwin-amd64/minikube"
+    },
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "boundary",
+    "files.trimTrailingWhitespace": true,
+
+    "diffEditor.renderSideBySide": true,
+
+
+    "editor.fontSize": 12,
+    "files.autoSave": "afterDelay",
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "off",
+    "go.gopath": "/Users/pmichalec/go",
+    "go.useLanguageServer": true,
+    "editor.tabCompletion": "onlySnippets",
+    "go.testFlags": [
+        "-v",
+        "-count=1",
+        "-race"
+    ],
+    "go.inferGopath": true,
+    "git.enabled": true,
+    "go.testTimeout": "30s",
+    "terminal.integrated.fontSize": 14,
+
+    "editor.formatOnPaste": true,
+
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j","j"],
+            "after": ["<Esc>"]
+        }
+    ],
+
+    "vim.normalModeKeyBindingsNonRecursive": [
+         {
+             "before": ["<leader>", "d"],
+             "after": ["d", "d"]
+         },
+         {
+             "before": ["<C-n>"],
+             "commands": [":nohl"]
+         },
+         {
+            "before": [ "<leader>", "o" ],
+            "after": [],
+            "commands": [
+                {
+                    "command": "workbench.action.quickOpen"
+                }
+            ]
+        },
+    ],
+
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": [":"],
+            "commands": [
+                "workbench.action.showCommands",
+            ]
+        },
+        // indent
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },{
+
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+        // bookmarks
+         {
+             "before": ["<leader>", "m"],
+             "commands": [
+                 "bookmarks.toggle"
+             ]
+         }, {
+             "before": ["<leader>", "b"],
+             "commands": [
+                 "bookmarks.list"
+             ]
+         },
+    ],
+
+    "gitlens.advanced.messages": {
+        "suppressCommitHasNoPreviousCommitWarning": true
+    },
+
+    "[cue]": {
+    },
+
+    "[jsonnet]": {
+
+    },
+    "explorer.confirmDragAndDrop": false,
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter-notebook"
+    },
+    "redhat.telemetry.enabled": false,
+    "explorer.confirmDelete": false,
+    "breadcrumbs.enabled": false,
+    "workbench.colorTheme": "Monokai",
+
+    //"vim.handleKeys": {
+    //    "<C-w>": false
+    //}
+
+    "github.copilot.enable": {
+        "*": true,
+        "yaml": false,
+        "plaintext": false,
+        "markdown": false
+    },
+    "editor.guides.indentation": true,
+    "window.zoomLevel": 1,
+    "git.openRepositoryInParentFolders": "always"
+
+}

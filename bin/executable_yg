@@ -1,0 +1,39 @@
+#!/bin/bash
+# tl;dr
+# yaml-grep; to extract partial branches based on the 'jq' regex pattern.
+
+# install:
+# wget https://gist.githubusercontent.com/epcim/f1c5b748fa7c942de50677aef04f29f8/raw/yq.sh -O yg; chmod +x yg
+
+# usage:
+# ./yg '.compute?.network'
+#
+# classes/system/nova/compute/cluster.yml
+# {"engine":"neutron","host":"${_param:network_vip_address}","user":"neutron","password":"${_param:keystone_neutron_password}","port":9696,"tenant":"service"
+
+PATTERN=$@
+PATTERN=${PATTERN:-.parameters}
+
+export GOPATH=${GOPATH:-$HOME/go}
+export PATH=$PATH:$GOPATH/bin
+
+# with pure python yq (much slower)
+# sudo pip install git+git://github.com/kyle-long/yq.git@master
+# for i in $(find . -name "*.yml"); do echo $i; cat $i | yq -ec "..|${PATTERN}| select(.!=null)" || printf '\e[A\e[K'; done
+
+# with go yaml2json
+if [ command -v yaml2json &>/dev/null ]; then
+  if [ command -v go ]; then
+    pushd $GOPATH
+    go get github.com/bronze1man/yaml2json
+    popd
+    pushd $GOPATH/src/github.com/bronze1man/yaml2json
+    go build
+    go install
+    popd
+  else
+    echo "First install github.com/bronze1man/yaml2json" > /dev/stderr
+  fi
+fi
+
+for i in $(find . -iregex ".*\.[yaml]*$"); do echo $i > /dev/stderr ; cat $i | yaml2json | jq -e "..|${PATTERN}| select(.!=null)" || printf '\e[A\e[K'; done

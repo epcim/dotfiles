@@ -1,0 +1,14 @@
+#!/bin/bash
+
+test -z $1 && {
+    echo Usage: `basename $0` ./path ./another
+    exit 1
+}
+
+mkdir /tmp/$$.empty
+for FO in $@; do
+    echo "Deleting: $FO"
+    time rsync -a --delete /tmp/$$.empty/ $FO/
+    rmdir $FO
+done
+rmdir /tmp/$$.empty

@@ -1,0 +1,3 @@
+#!/bin/bash
+
+osd_cat -p top -o 50 -A center -f -*-fixed-medium-r-*-*-*-130-*-*-*-*-iso8859-2 -c lightcyan -d 7 -l20 -s1 -a1 $* -

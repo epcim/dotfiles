@@ -1,0 +1,16 @@
+#!/bin/bash
+
+KEEP=$2
+test -z $2 || KEEP=3
+
+SNAPSHOTS=`vboxmanage snapshot $1  list|sed -e 's/.* \([0-9a-z]*-[0-9a-z]*-[0-9a-z]*-[0-9a-z]*-[0-9a-z]*\).*/\1/'| head -n-$KEEP`
+
+J=0
+for i in $SNAPSHOTS; do
+	export J=$(($J+1))
+	if [ $J -lt $KEEP ]; then continue; fi
+	echo Deleting $1 - $i
+	vboxmanage snapshot $1 delete $i;
+	echo "Sleeping 30s..."
+	sleep 30
+done

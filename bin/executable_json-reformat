@@ -1,0 +1,12 @@
+#!/bin/sh
+
+f=$1
+
+tmpf=$(mktemp --tmpdir=$(dirname $f) -t)
+jq "." "$f" > "$tmpf" && {
+    mv -f "$tmpf" "$f"
+} || {
+    echo Format failed!
+    rm -f "$tmpf"
+}
+

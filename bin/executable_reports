@@ -1,0 +1,57 @@
+#!/bin/bash
+# Simple file based report/note database sercher/indexer.
+# Search for all *.report (optionally .rst, .rest, .md) files in subdirs and list them.
+
+NOTE=""
+
+# search
+if [ "$1" == "" ] ;then
+	#find . -type f \( -name "*report*" -o -name "*.md" \) -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
+  SOURCES=$(find . -type d -name '*reports*')
+  for p in $SOURCES; do
+    find $p -type f -name '*.md' -exec ls -l --time-style="+%Y-%m-%d" "{}" ";"| cut -d" " -f 6,7 | egrep -v \\.svn\|\\.hg\|\\.git| sort -r 
+  done
+  echo "Use 'haroopad ' or 'vim ' to edit."
+  exit 0
+fi;
+
+# create new
+if [ "$1" != "" ] ;then
+    NAME=$1
+    SUFFIX=`basename $1|sed -e 's/.*\.\([a-zA-Z0-9]*\)/\1/'`
+    test -z $SUFFIX || SUFFIX=md
+
+    # Use template if exist
+    TEMPLATES_DIR="$HOME/.homesick/repos/dotfiles/templates/report"
+    test -d "$TEMPLATES_DIR" &&{ 
+
+        #use template if available
+        test -e $TEMPLATES_DIR/template.$SUFFIX && {
+            cp -i $TEMPLATES_DIR/template.$SUFFIX $NAME.report.$SUFFIX
+        }
+
+        #TODO: assumed for file type specific help/tools/processing
+        case $SUFFIX in
+            rst | RST)
+                NOTE=$NOTE + "\n"
+                NOTE=$NOTE + " rst2odt --syntax --template to render the rerport"
+                NOTE=$NOTE + "\n"
+                NOTE=$NOTE + " rst2odt-ibm --syntax --template to render the rerport"
+            ;;
+            *)
+            ;;
+        esac
+    }
+
+    # Final notes, guidance
+    test "$NOTE" != "" && {
+        NOTE="Notes:\n" + $NONE + "\n\n"
+        echo -e "$NOTE"
+    }
+
+    # Open
+    hpad=$(which haroopad)
+    test -x "$hpad" -a "$SUFFIX" = "md" && EDITOR=$(which haroopad)
+    $EDITOR ${NAME}.report.${SUFFIX} 2> /dev/null;
+fi
+exit 0

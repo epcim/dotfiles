@@ -1,0 +1,43 @@
+#!/bin/bash
+
+# TODO, cache gerrit query and JQ output
+
+GERRITREMOTE="$(git remote -v | sed -e 's,.*@\(.*\):.*,\1,'|egrep gerrit |sort -u|tail -n1)"
+GREP_PATTERN="${@:2}"
+GREP_PATTERN="${GREP_PATTERN,,}"
+[[ -z $GREP_PATTERN ]] && GREP_PATTERN="$GERRITREMOTE"
+
+if [ "$1" == "--list" ]; then
+  ssh -p 29418 ${GERRITREMOTE} \
+    gerrit query --format=JSON "status:open label:verified>=+1 label:Code-Review>=+0" |\
+    jq -r '"\(.url)@\(.project)@\(.owner.username)@[\(.topic)]@\(.commitMessage|split("\n")[0])"'| column -t -s '@' |\
+      egrep -i "${GREP_PATTERN:- http}"
+      ret=$?
+      echo ""
+      echo "# Usage: ./$0 --batch '${GREP_PATTERN}' --code-review +2 --workflow +1 --submit"
+      exit $ret;
+
+elif [ "$1" == "--dry" ]; then
+  GREP_PATTERN="${2}"
+  echo $GREP_PATTERN
+  ssh -p 29418 ${GERRITREMOTE} \
+    gerrit query --current-patch-set --format=JSON "status:open label:verified>=+1 label:Code-Review>=+1" |\
+      jq -r '"\(.currentPatchSet.revision)@\(.url)@\(.project)@\(.owner.username)@[\(.topic)]@\(.commitMessage|split("\n")[0])"'| column -t -s '@' |\
+      egrep -i "${GREP_PATTERN}" | awk '{print $1 ";#" $3}'|\
+      xargs -n1 -I% echo "ssh -p 29418 ${GERRITREMOTE} gerrit review ${@:3} %";
+
+elif [ "$1" == "--batch" ]; then
+  GREP_PATTERN="${2}"
+  echo $GREP_PATTERN
+  ssh -p 29418 ${GERRITREMOTE} \
+    gerrit query --current-patch-set --format=JSON "status:open label:verified>=+1 label:Code-Review>=+1" |\
+      jq -r '"\(.currentPatchSet.revision)@\(.url)@\(.project)@\(.owner.username)@[\(.topic)]@\(.commitMessage|split("\n")[0])"'| column -t -s '@' |\
+      egrep -i "${GREP_PATTERN}" | awk '{print $1}'|\
+      xargs -n1 -I% echo "ssh -p 29418 ${GERRITREMOTE} gerrit review ${@:3} %" | tee | bash;
+
+else
+    echo "# Usage:"
+    echo "# ./$0 --list  'GREP_PATTERN'";
+    echo "# ./$0 --dry   'GREP_PATTERN' --code-review +2 --workflow +1 --submit";
+    echo "# ./$0 --batch 'GREP_PATTERN' --code-review +2 --workflow +1 --submit";
+fi;

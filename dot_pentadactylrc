@@ -1,0 +1,12 @@
+"1.1
+
+loadplugins '\.(js|penta)$'
+group user
+
+" W3connections, Wikipedia, Facebook pass keys
+group -description 'Pass keys in text insert mode' -locations=w3-connections.ibm.com,www.wikipedia.com,www.facebook.com facebookinsert
+imap <Return> <Pass>
+imap <S-Return> <Pass>
+
+
+" vim: set ft=pentadactyl:

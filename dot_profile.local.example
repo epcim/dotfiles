@@ -1,0 +1,11 @@
+
+
+# profile overrides
+#export FLAVOR=""
+
+# SHORTCUTS
+export WORK="~/Workspace/$FLAVOR"
+export CDPATH="$WORK::$CDPATH"
+
+# binutils
+export PATH="/usr/local/opt/binutils/bin:$PATH"

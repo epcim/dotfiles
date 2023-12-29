@@ -1,0 +1,13 @@
+#!/bin/sh
+
+DATA="
+<entry xmlns="http://www.w3.org/2005/Atom"> \
+<title type='text'>From linux shell:</title>   \
+<content type="text">$1</content>   \
+<category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="entry" />    \
+<category scheme="http://www.ibm.com/xmlns/prod/sn/message-type" term="status" />   \
+</entry>
+"
+
+
+curl --user 'petr_michalec@cz.ibm.com' -H "Content-Type: application/atom+xml" -d "$DATA" -X PUT "https://w3-connections.ibm.com/profiles/atom/mv/theboard/entry/status.do"

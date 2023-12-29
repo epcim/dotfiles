@@ -1,0 +1,16 @@
+#! /bin/bash
+
+# Run program unless it's already running.
+pgrep $@ > /dev/null || ($@ &)
+
+#alternative
+
+#if [ ! "`ps -A | grep $1`" ]; then
+#    $@;
+#fi
+
+# or
+
+#if [ -z "`ps -Af | grep -o -w ".*$1" | grep -v grep | grep -v run-once`" ]; then
+#  $@
+#fi

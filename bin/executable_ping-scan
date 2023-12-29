@@ -1,0 +1,10 @@
+#!/bin/bash
+
+P_LIMIT=`ulimit -a | grep processes | sed -e 's/.*  \([0-9]*\)/\1/'`
+P_LIMIT_N=`echo $P_LIMIT + 700|bc`
+#ulimit -u $P_LIMIT_N
+#ulimit -u $P_LIMIT
+
+for i in {1..254}; do ping -c1 $1.$i & done | grep 'time=0.'
+
+

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+[ "$1" = "" ] && P=`pwd` || P=$1
+
+gvim "+cd $P" "+TlistAddFilesRecursive . [^_]*py\|*html\|*css" +TlistOpen
+

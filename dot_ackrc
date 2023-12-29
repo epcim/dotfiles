@@ -1,0 +1,8 @@
+
+
+# https://stackoverflow.com/questions/4748529/how-can-i-get-ack-to-ignore-orig-files
+--type-set=DUMB=*.orig
+--noDUMB
+
+# must be one of: ext, firstlinematch, is, match.
+# --ignore-file "match:.generated"

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+
+
+
+
+
+
+if [ "$1" == "all" ]; then
+  ssh -p 29418 $(git remote -v | sed -e 's,.*@\(.*\):.*,\1,'|egrep gerrit |sort -u) gerrit query --format=JSON "status:open" |\
+    jq -r '"\(.url)@\(.project)@\(.owner.username)@\(.commitMessage|split("\n")[0])@[\(.topic)]"'|column -t -s '@'
+    #jq -r --slurp 'sort_by(.number)| "\(.url)@\(.project)@\(.owner.username)@\(.commitMessage|split("\n")[0])@[\(.topic)]"'|column -t -s '@'
+else
+  ssh -p 29418 $(git remote -v | sed -e 's,.*@\(.*\):.*,\1,'|egrep gerrit |sort -u) gerrit query --format=JSON "status:open label:verified>=+1 label:Code-Review>=+1" |\
+    #jq -r --slurp 'sort_by(.number|tonumber)| .[] '
+    jq -r '"\(.url)@\(.project)@\(.owner.username)@\(if .topic == null then .commitMessage|split("\n")[0] else "["+.topic+"] "+.commitMessage|split("\n")[0] end)"'|column -t -s '@' | sort -k4
+fi
