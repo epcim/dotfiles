@@ -5,6 +5,7 @@ url = "https://gitlab.com"
 path = "gitlab"
 env_var = "GITLAB_TOKEN"
 exclude = [
+    "f5.*",
     "volterra.*",
     "mirantis.*",
 ]
