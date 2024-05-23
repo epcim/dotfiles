@@ -4,7 +4,7 @@ Host *
   #This allows anyone to connect to the forwarded ports. If the server is on the public Internet, anyone on the Internet can connect to the port.
   #GatewayPorts yes
   #GatewayPorts clientspecified
-  StrictHostKeyChecking yes
+  StrictHostKeyChecking no
   ForwardAgent no
   SetEnv TERM=xterm
 

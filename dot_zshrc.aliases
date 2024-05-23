@@ -60,6 +60,10 @@ alias journalctl='sudo journalctl'
 alias vi='sudo vi'
 if $(which nvim > /dev/null); then
   alias vim='nvim'
+  if $(which chezmoi > /dev/null); then
+    unalias vim
+    function vim() { chezmoi edit --watch "$1" 2>/dev/null || nvim "$1"; }
+  fi
   alias vimdiff='nvim -d'
 fi
 #alias scrot='scrot "%Y-%m-%d_$wx$h.png" -e "mv $f ~/shots/$f"'
@@ -84,7 +88,7 @@ alias v.lssitepackages='lssitepackages'
 #git aliases
 alias gs='git status '
 alias ga='git add '
-alias gb='git branch '
+alias gb='git branch -v --sort=committerdate'
 alias gc='git commit'
 # on branchname id-some-fix (add commit msg "ref #id")
 # alias gc="echo -e \"\n\nref #\$(( \$(git branch --show-current | awk -F- '{ print $1}') + 0))\" > /tmp/gitmessage; git commit \$(gpg --card-status > /dev/null 2>&1 && echo -S)"
@@ -231,6 +235,8 @@ alias kluctl='${KLUCTL:-kluctl} --no-update-check'
 alias k9s='nocorrect k9s --refresh 30 -n all'
 # alias kubectl='nocorrect kubectl'
 # kubecltl alias that remember last namespace used
+which kubecolor 2>/dev/null &&\
+  alias kubectl="kubecolor"
 function k() {
   ARGS=()
   while [[ $# -gt 0 ]]; do
@@ -452,4 +458,8 @@ function photoresize() {
   mogrify -path $3 -filter Triangle -define filter:support=2 -resize $2 -unsharp 0.25x0.08+8.3+0.045 -dither None -quality ${QUALITY:-82} -define jpeg:fancy-upsampling=off -define png:compression-filter=5 -define png:compression-level=9 -define png:compression-strategy=1 -define png:exclude-chunk=all -interlace none -colorspace sRGB $1
 }
 
-
+backz () {
+	local git_root
+	git_root=$(git rev-parse --show-toplevel)
+	cd “$git_root”
+}

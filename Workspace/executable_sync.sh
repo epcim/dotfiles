@@ -1,7 +1,7 @@
 #!/bin/sh
 
-export GITHUB_TOKEN=$(gopass epcim/github-token)
-export GITLAB_TOKEN=$(gopass f5/gitlab-token)
+export GITHUB_TOKEN=$(gopass ${GITHUB_GOPASS_TOKEN:-"epcim/github-token"})
+export GITLAB_TOKEN=$(gopass ${GITLAB_GOPASS_TOKEN:-"f5/gitlab-token"})
 
 export GIT_WORKSPACE=$PWD
 GIT_WORKSPACE_BIN="git-workspace"

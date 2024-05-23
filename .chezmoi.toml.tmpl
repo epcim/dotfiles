@@ -30,3 +30,8 @@ encryption = {{ $eneng | quote }}
     #autoPush = true
     commitMessageTemplate = {{ `"{{ promptString \"Commit message\" }}"` }}
 
+
+[merge]
+    command = "nvim"
+    args = ["-d", `"{{ .Destination }}"`, `"{{ .Source }}"`, `"{{ .Target }}"`]
+
