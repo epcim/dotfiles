@@ -1,10 +1,5 @@
 # /bin/ls gitlab-f5/f5/volterra/lilac-eng |xargs -I% echo -e '        "%",' | pbcopy
 {exclude: [
-    "xxx",
-    "aaa",
-    "ttt",
-    "bbb",
-    "kkk",
     "access-group",
         "contractor-website-development",
         "vcs-dev-write-access",
