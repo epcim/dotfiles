@@ -407,7 +407,7 @@ function dirdiff()
     # $2 - sub. path from cwd
     RDB=$(printf '%q' "${1}"); shift
     PTH=$(printf '%q' "${1}"); shift
-    nvim $@ -c "+DirDiff $RDB/$PTH ${PTH:-./}"
+    nvim $@ "+DirDiff $RDB/$PTH ${PTH:-./}"
 }
 
 
