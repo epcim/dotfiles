@@ -258,11 +258,13 @@ function k() {
     nocorrect kubectl $ARGS
   fi
 }
+alias kg='k get pods -A | grep'
+alias kp='k get pods -A'
 alias kgp='k get pods -A'
-alias kgq='k get quota'
-alias kge='k get events --sort-by=".lastTimestamp"'
+alias kq='k get quota'
+alias ke='k get events --sort-by=".lastTimestamp"'
 #
-function kga {
+function ka {
   local ALL="$(kubectl api-resources --verbs=list --namespaced -o name |\
     grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq)"
   for i in $ALL; do
