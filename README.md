@@ -43,32 +43,32 @@ TL;DR;
 
 to update from upstream:
 ```
-chez diff
-chez apply -v 
+chezmoi diff
+chezmoi apply -v 
 
 # or
-chez update
+chezmoi update
 
 # to run install scripts
-RUN_AFTER=utils chez apply
+RUN_AFTER=utils chezmoi apply
 
 ```
 
 to track new dotfiles:
 ```
 # to update your dotfiles with the shared configuratio:
-chez git pull -- --autostash --rebase && chezmoi diff  
-chez apply -v --dry-run
-chez apply
+chezmoi git pull -- --autostash --rebase && chezmoi diff  
+chezmoi apply -v --dry-run
+chezmoi apply
 
 # add files
-chez add --follow ~/.zshrc.$HOSTAME
-chez add --follow --template ~/.bashrc.$HOSTNAME
-chez add --follow --encrypt ~/.secretFile
+chezmoi add --follow ~/.zshrc.$HOSTAME
+chezmoi add --follow --template ~/.bashrc.$HOSTNAME
+chezmoi add --follow --encrypt ~/.secretFile
 
 # edit/commit/diff
-chez edit ~/.zshrc
-chez git status/add/commit
+chezmoi edit ~/.zshrc
+chezmoi git status/add/commit
 ```
 
 
@@ -113,7 +113,8 @@ On OSX, to use deployment model scripts, ie: ("make render")
 
 ```
   brew install -q \
-    jq yq curl wget coreutils diffutils findutils gawk gnu-sed make just
+    jq yq curl wget coreutils diffutils findutils gawk gnu-sed gnu-tar rsync make just age \
+    gopass chezmoi nnn direnv bat
 
 ```
 
