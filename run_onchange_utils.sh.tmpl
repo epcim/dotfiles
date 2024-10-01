@@ -1,0 +1,41 @@
+#!/bin/sh
+
+#FIXME, dont run this always but on autoUpdate condition
+
+## OSX
+{{- if eq .chezmoi.os "darwin" }}
+
+  ## common utils
+  brew install -q awscli bash bat chezmoi coreutils curl diffutils direnv eksctl fd findutils fzf git-workspace gitbatch go-jsonnet gopass jq just k9s kubectl kustomize make nnn ripgrep rsync skopeo stern terraform wget yq
+
+
+  echo -e "\n\n"
+  echo    "Up to you to install additional tools:"
+  echo    "brew install -y ansible ansible-lint aws-iam-authenticator azure-cli"
+
+  {{ if .features.gnutools }}
+  ## GNU first class experience
+  brew install -q \
+    -q coreutils gnu-tar iproute2mac binutils diffutils ed findutils gawk gnu-indent gnu-sed gnu-which gnutls grep gzip screen watch
+  test -e ~/bin || mkdir ~/bin
+  test -e ~/homebrew/bin/gawk && HOMEBREW_PREFIX=~/homebrew || HOMEBREW_PREFIX=${HOMEBREW_PREFIX:-/usr/local}
+  #export PATH="$HOMEBREW_PREFIX/libexec/gnubin:$HOMEBREW_PREFIX/bin:$PATH"
+  for i in $(ls $HOMEBREW_PREFIX/bin/g*); do
+      N=$(basename ${i/g//})
+      ln -sf $i ~/bin/$N
+  done
+
+  {{ end }}
+
+  {{ if eq .shell "fish" }}
+  # fish
+  brew install -q fisher fish
+  fisher install jethrokuan/fzf
+  fisher install jethrokuan/z
+  {{ end }}
+
+
+## LINUX
+{{ else if eq .chezmoi.os "linux" }}
+
+{{ end }}

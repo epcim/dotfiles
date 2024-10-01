@@ -1,6 +1,7 @@
 # Usage:
 # chezmoi git pull -- --autostash --rebase && chezmoi diff  
 # chezmoi apply -v
+
 {{- $email := promptStringOnce . "email" "Email address" -}}
 {{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" -}}
 {{- $eneng := promptStringOnce . "eneng" "Encryption engine [age]"  }}
@@ -16,7 +17,8 @@
 [data.install]
   age = {{ eq $eneng "age" }}
   gopass = true
-  gnutools = true # TODO, enable implicit on osx
+  gnutools = true     # Provide GNU tools by symlinking into ~/bin
+  kitty = false
 
 
 encryption = {{ $eneng | quote }}
@@ -29,7 +31,6 @@ encryption = {{ $eneng | quote }}
     autoCommit = true
     #autoPush = true
     commitMessageTemplate = {{ `"{{ promptString \"Commit message\" }}"` }}
-
 
 {{ $el :=  "{{"  }}
 {{ $er :=  "}}"  }}
