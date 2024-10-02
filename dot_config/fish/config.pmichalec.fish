@@ -5,29 +5,15 @@ function source_rc
 end
 
 if status --is-login
-    set -l U (string replace "." "" $USER)
-    source_rc ~/.config/fish/config.{aliases,$U,local}
-    set CDPATH . ~/Sync ~/Work
-
+    source_rc ~/.config/fish/config.{vi,f5}.fish
+    set CDPATH . ~/Sync ~/Work ~/Workspace
     which direnv &>/dev/null && direnv hook fish | source  || true
     which starship &>/dev/null && starship init fish | source  || true
 end
 
+## set -g Z_SCRIPT_PATH $HOME/bin/z.sh
+
 set -gx fish_greeting ''
-
-## Key bindings
-function fish_user_key_bindings
-    bind \ec append-copy
-    bind \ep prepend-paste
-    bind \ev prepend-vim
-    bind \ey 'commandline -b | pbcopy'
-    bind \e'>' 'commandline -a -- "| shiftr"'
-    bind \e'<' 'commandline -a -- "| shiftl"'
-    bind \es 'git st'
-    bind \ed 'git di'
-    bind \ex 'git x'
-end
-
 
 ## Simplify
 # vi promt mode disabled
