@@ -1,0 +1,29 @@
+font_family        Menlo
+font_size 14.0
+scrollback_lines 10000
+focus_follows_mouse yes
+enabled_layouts tall:bias=50;full_size=1;mirrored=false
+dynamic_background_opacity yes
+shell /usr/local/bin/zsh
+term xterm-256color
+macos_titlebar_color system
+
+tab_bar_edge top
+tab_bar_background none
+tab_bar_style powerline
+tab_powerline_style slanted
+tab_border_width 1
+tab_border_color #00AAFF
+
+tab_title_template "{fmt.fg.red}{activity_symbol}{fmt.fg._fff}{tab.active_oldest_wd.split('/')[-1].upper()}"
+active_tab_title_template "{fmt.fg.red}{bell_symbol}{activity_symbol}{fmt.fg._fff}{title}"
+active_tab_foreground #fff
+active_tab_background #8631F4
+inactive_tab_foreground #c2c2c2
+inactive_tab_background #0999e1 
+#active_tab_font_style bold-italic
+
+
+
+#allow_remote_control yes
+#remote_control_password "" get-colors set-colors focus-window focus-tab set-tab-* set-window-*
