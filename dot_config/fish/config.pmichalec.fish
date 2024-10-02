@@ -1,14 +1,16 @@
 
 # RC
 function source_rc
- touch $1 && source $1
+ touch $argv && source $argv
 end
 
-if status --is-login
+if status --is-interactive
     source_rc ~/.config/fish/config.{vi,f5}.fish
-    set CDPATH . ~/Sync ~/Work ~/Workspace
+
     which direnv &>/dev/null && direnv hook fish | source  || true
     which starship &>/dev/null && starship init fish | source  || true
+
+    set CDPATH . ~/Sync ~/Work ~/Workspace
 end
 
 ## set -g Z_SCRIPT_PATH $HOME/bin/z.sh
@@ -19,7 +21,7 @@ set -gx fish_greeting ''
 # vi promt mode disabled
 # function fish_mode_prompt; end
 # funcsave fish_mode_prompt
-function prompt_login; end
+# function prompt_login; end
 
 
 ## Customizations

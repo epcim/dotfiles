@@ -25,7 +25,7 @@ alias gl 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %
 alias gh 'git log --pretty=tformat:%H |xargs -n1 git show'
 
 # k8s
-alias stern "stern -s1m -n (default "kube-system" "$KUBE_NS"} $@"
+alias stern "stern -s1m -n (default "kube-system" "$KUBE_NS")"
 alias kluctl 'kluctl --no-update-check'
 which kubecolor &>/dev/null && 
   alias kubectl "kubecolor" || true
