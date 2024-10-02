@@ -1,0 +1,55 @@
+
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch -v --sort=committerdate'
+alias gc='git commit'
+alias gd='git diff'
+alias gco='git checkout '
+alias gl='git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias gh='git log --pretty=tformat:%H |xargs -n1 git show'
+
+# k8s
+alias stern="stern -s5m -n ${KUBE_NS:-${NAMESPACE:-ves-system}} $@"
+alias kluctl='${KLUCTL:-kluctl} --no-update-check'
+alias k9s='nocorrect k9s --refresh 30 -n all'
+# alias kubectl='nocorrect kubectl'
+# kubecltl alias that remember last namespace used
+which kubecolor 2>/dev/null &&\
+  alias kubectl="kubecolor"
+function k() {
+  ARGS=()
+  while [[ $# -gt 0 ]]; do
+    case $1 in 
+      -n|--namespace)
+        export KUBE_NS="$2"
+        shift; shift
+        ;;
+      *)
+        # positional
+        ARGS+=("$1")
+        shift
+        ;;
+    esac
+  done
+  if [[ -n "$KUBE_NS" ]]; then
+    nocorrect kubectl --namespace=${KUBE_NS} $ARGS
+  else
+    nocorrect kubectl $ARGS
+  fi
+}
+alias kg='k get pods -A | grep -i'
+alias kp='k get pods -A'
+alias kgp='k get pods -A'
+alias kq='k get quota'
+alias ke='k get events --sort-by=".lastTimestamp"'
+#
+function ka {
+  local ALL="$(kubectl api-resources --verbs=list --namespaced -o name |\
+    grep -v "events.events.k8s.io" | grep -v "events" | sort | uniq)"
+  for i in $ALL; do
+    echo "Resource:" $i
+    kubectl get --ignore-not-found ${i} -n $@
+  done
+}
+
+

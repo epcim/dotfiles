@@ -1,16 +1,5 @@
-# Quick edits
-alias ea 'vim ~/.config/fish/aliases.fish'
-alias ef 'vim ~/.config/fish/config.fish'
-alias eg 'vim ~/.gitconfig'
-alias ev 'vim ~/.vimrc.local'
-alias et 'vim ~/.tmux.conf'
 
-alias vim-norc 'vim -u NORC'
-alias vim-none 'vim -u NONE'
-
-
-## CORES
-####################################################
+# u*nix
 alias df 'command df -m'
 alias j jobs
 alias l 'ls -la --color'
@@ -25,8 +14,32 @@ alias g git
 alias c clear
 alias v vim
 
-####################################################
-## VIM / FIND
+# git
+alias gs 'git status '
+alias ga 'git add '
+alias gb 'git branch -v --sort=committerdate'
+alias gc 'git commit'
+alias gd 'git diff'
+alias gco 'git checkout '
+alias gl 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias gh 'git log --pretty=tformat:%H |xargs -n1 git show'
+
+# k8s
+alias stern "stern -s1m -n (default "kube-system" "$KUBE_NS"} $@"
+alias kluctl 'kluctl --no-update-check'
+which kubecolor &>/dev/null && 
+  alias kubectl "kubecolor" || true
+alias k 'kubectl'
+alias kg 'k get pods -A | grep -i'
+alias kp 'k get pods -A'
+alias kq 'k get quota'
+alias ke 'k get events --sort-by=".lastTimestamp"'
+alias kgp 'k get pods -A'
+alias k9s 'nocorrect k9s --refresh 30 -n all'
+
+
+
+
 
 function lsd -d 'List only directories (in the current dir)'
     command ls -d */ | sed -Ee 's,/+$,,'
