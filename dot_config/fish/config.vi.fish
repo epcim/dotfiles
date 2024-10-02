@@ -16,4 +16,4 @@ function fish_user_key_bindings
     bind \ex 'git x'
 end
 
-set -g EDITOR=nvim
+set -g EDITOR nvim
