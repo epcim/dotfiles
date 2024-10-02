@@ -1,36 +1,16 @@
-## DEPRECATED
-## Path to Oh My Fish install.
-#set -gx OMF_PATH /Users/pmichalec/.local/share/omf
-## Customize Oh My Fish configuration path.
-##set -gx OMF_CONFIG /Users/pmichalec/.config/omf
-## Load oh-my-fish configuration.
-## source $OMF_PATH/init.fish
-## z
-## set -g Z_SCRIPT_PATH $HOME/bin/z.sh
-####
-# rbenv
-#function init_rbenv
-#    set LD_LIBRARY_PATH $HOME/.rbenv/versions/(cat $HOME/.rbenv/version)/lib $LD_LIBRARY_PATH
-#    set PATH $HOME/.rbenv/bin $PATH; and \
-#    set PATH $HOME/.rbenv/shims $PATH; and \
-#    rbenv rehash >/dev/null ^&1
-#    rbenv init - fish | source
-#end
-#test -e $HOME/.rbenv ; and init_rbenv
-####
-# chef
-#test -e ~/.chefdk;and chef shell-init fish | source
-
-
-# HOMESICK
-# source $HOME/.homesick/repos/homeshick/homeshick.fish
 
 # RC
-# source $HOME/.oh-my-fish
-source $HOME/.config/fish/aliases.fish
+function source_rc
+ touch $1 && source $1
+end
 
+if status --is-login
+    set -l U (string replace "." "" $USER)
+    source_rc ~/.fishrc.{aliases,$U,local}
+    set CDPATH . ~/Sync ~/Work
+    direnv hook fish | source
+end
 
-#set fish_color_hostname 'a67523'
 set -gx fish_greeting ''
 
 ## Key bindings
@@ -44,16 +24,6 @@ function fish_user_key_bindings
     bind \es 'git st'
     bind \ed 'git di'
     bind \ex 'git x'
-end
-
-# Interactive/login shells
-if status --is-login
-    test -f ~/.fishrc.$ENV && . ~/.fishrc.$ENV
-    test -f ~/.fishrc.local && . ~/.fishrc.local
-end
-if status --is-interactive
-    set CDPATH . ~/Sync ~/Workspace
-    direnv hook fish | source
 end
 
 
