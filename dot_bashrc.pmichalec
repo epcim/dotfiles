@@ -1,0 +1,12 @@
+
+source_rc() { touch $@; source $@; }
+
+set -o vi
+
+which starship >/dev/null && eval "$(starship init bash)"
+
+# ruppa/z (path shortcuts)
+test -e ~/bin/z.sh &&\
+  source ~/bin/z.sh
+
+

@@ -1,0 +1,7 @@
+
+# bind keys
+bindkey -v                 # vi mode
+bindkey ' ' magic-space    # space to expand shortcuts
+bindkey '^[^e' expand-alias
+
+

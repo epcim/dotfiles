@@ -1,0 +1,19 @@
+
+
+# ---
+# EXAMPLE ADDITIONAL SETTINS
+# cat <<-EOF>| ~/.bashrc.local
+
+# prompt (loaded from ~/.profile)
+# which starship >/dev/null && eval "$(starship init bash)"
+#
+# # fzf
+# fzf=$(which fzf)
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse' # --border
+
+
+# # ruppa/z (path shortcuts)
+# test -e ~/bin/z.sh &&\
+#   source ~/bin/z.sh
+# 

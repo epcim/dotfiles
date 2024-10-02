@@ -1,13 +1,11 @@
-source_rc() { touch $1; source $1; }
+# .bashrc
+source_rc() { touch $@; source $@; }
 
-# global config & aliases & fn
+# global
 source_rc $HOME/.profile
-source_rc $HOME/.profile.local
-source_rc $HOME/.zshrc.aliases
 
 # team/user specific dotfiles
-source_rc $HOME/.zshrc.${FLAVOR:-local}
-source_rc $HOME/.zshrc.${FLAVOR:-local}.${USER/.} # in orde to share with others through chezmoi
+source_rc $HOME/.zshrc.{aliases,${USER/.},local} # FIXME configure chezmoi FLAVORS
 
 # set
 HISTFILE=~/.history
@@ -36,45 +34,3 @@ setopt NO_LIST_AMBIGUOUS     # on the first TAB (not 2nd)
 setopt LIST_PACKED           # list shortcuted
 setopt AUTOCD                # prefix "cd" before dirname
 
-# bind keys
-bindkey -v                 # vi mode
-bindkey ' ' magic-space    # space to expand shortcuts
-bindkey '^[^e' expand-alias
-
-
-# ---
-# EXAMPLE ADDITIONAL SETTINS
-# cat <<-EOF>| ~/.zshrc.local
-
-# prompt (loaded from ~/.profile)
-# which starship >/dev/null && eval "$(starship init zsh)"
-
-# # completion
-# zstyle ':completion:*' completer _files _expand _complete
-# zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
-# autoload -Uz compinit        # std rules for autocomplete
-# compinit
-# zstyle ':completion:*' menu select
-# # fzf
-# fzf=$(which fzf)
-# [ -x $fzf -a -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-# export FZF_DEFAULT_OPTS='--height 40% --layout=reverse' # --border
-# #[ -x ~/.zsh/plugins/fzf-tab ] && source ~/.zsh/plugins/fzf-tab/fzf-tab.plugin.zsh || true
-# # ruppa/z (path shortcuts)
-# test -e ~/bin/z.sh &&\
-#   source ~/bin/z.sh
-# # rename
-# autoload zmv                # group rename: zmv (*).doc $1.txt | zmv (**/)README $1CTIMNE
-# 
-# expand-alias() {
-# 	# for safety, in case there's an = which will mess things up...
-# 	local alias=${LBUFFER#*=}
-# 	if ! alias=$(alias $LBUFFER); then
-# 		zle beep
-# 		return 1
-# 	fi
-# 	LBUFFER=${(Q)${alias#*=}}
-# }
-# zle -N expand-alias
-
-# EOF
