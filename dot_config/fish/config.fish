@@ -1,7 +1,7 @@
 
 # RC
 function source_rc
- touch $argv && source $argv
+    for i in $argv; touch $i && source $i; end
 end
 
 if status --is-interactive
@@ -19,4 +19,10 @@ set -gx fish_greeting ''
 # function fish_mode_prompt; end
 # funcsave fish_mode_prompt
 # function prompt_login; end
+
+if which nvim 2>/dev/null
+   function vim
+       EDITOR=nvim chezmoi edit --watch "$argv[1]" 2>/dev/null || nvim "$argv[1]"
+   end
+end
 

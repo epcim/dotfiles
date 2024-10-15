@@ -2,30 +2,35 @@
 # chezmoi git pull -- --autostash --rebase && chezmoi diff  
 # chezmoi apply -v
 
-{{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" -}}
-{{- $eneng := promptStringOnce . "eneng" "Encryption engine [age]"  }}
+{{- $email := promptStringOnce . "email" "Email address" }}
+{{- $shell := promptStringOnce . "shell" "Your shell [zsh|fish|bash]" }}
+{{- $eneng := promptStringOnce . "eneng" "Encryption engine [age|]" }}
+{{- $featu := promptStringOnce . "featu" "Features [minimal,vimuser,gnutools|]" }}
 
 [data]
   email = {{ $email | quote }}
   shell = {{ $shell | quote }}
   eneng = {{ $eneng | quote }}
+  featu = {{ $featu | quote }}
 
 [data.features]
   dummy = false
+  minimal  = {{ contains "min" $featu }}  # Minimal isntallation, for servers
+  gnutools = {{ contains "gnu" $featu }}  # OSX GNU tools installed to ~/bin
+  vimuser  = {{ contains "vim" $featu }}  # Vim user experience, everywheere
 
 [data.install]
-  age = {{ eq $eneng "age" }}
+  #age = {{ eq $eneng "age" }}
   gopass = true
-  gnutools = true     # Provide GNU tools by symlinking into ~/bin
   kitty = false
-
 
 encryption = {{ $eneng | quote }}
 
+{{- if eq $eneng "age" }}
 [age]
     identity = "~/.ssh/id_ed25519"
     symmetric = true
+{{- end }}
 
 [git]
     autoCommit = true

@@ -16,4 +16,9 @@ function fish_user_key_bindings
     bind \ex 'git x'
 end
 
-set -g EDITOR nvim
+if which nvim > /dev/null
+    set -gx EDITOR nvim
+    alias vimdiff 'nvim -d'
+    alias vim 'nvim'
+end
+

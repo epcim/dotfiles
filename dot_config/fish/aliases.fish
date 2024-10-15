@@ -14,18 +14,8 @@ alias g git
 alias c clear
 alias v vim
 
-# git
-alias gs 'git status '
-alias ga 'git add '
-alias gb 'git branch -v --sort=committerdate'
-alias gc 'git commit'
-alias gd 'git diff'
-alias gco 'git checkout '
-alias gl 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
-alias gh 'git log --pretty=tformat:%H |xargs -n1 git show'
-
 # k8s
-alias stern "stern -s1m -n (default "kube-system" "$KUBE_NS")"
+alias stern 'stern -s1m'
 alias kluctl 'kluctl --no-update-check'
 which kubecolor &>/dev/null && alias kubectl "kubecolor" || true
 alias k 'kubectl'
@@ -35,8 +25,6 @@ alias kq 'k get quota'
 alias ke 'k get events --sort-by=".lastTimestamp"'
 alias kgp 'k get pods -A'
 alias k9s 'nocorrect k9s --refresh 30 -n all'
-
-
 
 
 
@@ -135,61 +123,43 @@ function vw
 end
 
 ####################################################
-## GIT
+# git
 
-alias gs='clear ;and git status'
-alias gb='git branch'
-alias gbranch='git rev-parse --abbrev-ref HEAD' #get current branch name
-alias gl="clear ;and git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-alias gt='git tag'
-#alias grm='git rm'
-alias gp='git push'
-alias gbi='git bisect'
-alias gbg='git bisect good'
-alias gbb='git bisect bad'
-alias gco='git checkout'
-alias ggo='git checkout'
-alias gm='git merge'
-alias gmt='git mergetool'
-alias gdt='git difftool'
-alias gpl='git pull'
-alias gpr='git pull --rebase'
-alias gup='git stash ;and git pull --rebase ;and git stash apply'
-#alias gr='git rebase'
-#alias gri='git rebase -i'
-alias gst='git stash'
-alias gsta='git stash apply'
-alias gunstage='git reset HEAD'
-
-# checkout pull request
-function gcopr
-   git fetch origin pull/$argv/head:pr-$argv ;and git checkout pr-$argv;
-end
-
-alias ga 'git add'
-alias gd 'git diff'
+alias gs 'git status '
+alias ga 'git add '
+alias gb 'git branch -v --sort=committerdate'
 alias gc 'git commit'
-alias gti git
-alias a 'git amend'
+alias gd 'git diff'
+alias gco 'git checkout '
+alias gl 'git log --graph --pretty=format:"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --abbrev-commit'
+alias gh 'git log --pretty=tformat:%H |xargs -n1 git show'
+
+alias gamend 'git commit --amend -C HEAD -a'
 alias gbr 'git recent-branches 2.days.ago'
 
 function git-search
     git log -S"$argv" --pretty=format:%H | map git show 
 end
 
-## git gr (npm install -g git-run)
-function grd
-    gr @$argv[1..-1] git diff
+### git gr (npm install -g git-run)
+#function grd
+#    gr @$argv[1..-1] git diff
+#end
+#function grdc
+#    gr @$argv[1..-1] git diff --cached
+#end
+#function grl
+#    gr @$argv[1..-1] git --no-pager log --decorate --graph --oneline -n 3
+#end
+#function grs
+#    gr @$argv[1..-1] git status
+#end
+
+# checkout pull request
+function gcopr
+   git fetch origin pull/$argv/head:pr-$argv ;and git checkout pr-$argv;
 end
-function grdc
-    gr @$argv[1..-1] git diff --cached
-end
-function grl
-    gr @$argv[1..-1] git --no-pager log --decorate --graph --oneline -n 3
-end
-function grs
-    gr @$argv[1..-1] git status
-end
+
 
 ####################################################
 ## CLEANUPS

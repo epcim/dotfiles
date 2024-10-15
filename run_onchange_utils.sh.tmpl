@@ -1,17 +1,17 @@
 #!/bin/sh
 
-#FIXME, dont run this always but on autoUpdate condition
-
 ## OSX
 {{- if eq .chezmoi.os "darwin" }}
 
   ## common utils
-  brew install -q awscli bash bat chezmoi coreutils curl diffutils direnv eksctl fd findutils fzf git-workspace gitbatch go-jsonnet gopass jq just k9s kubectl kustomize make nnn ripgrep rsync skopeo stern terraform wget yq
+  brew install -q awscli bash bat chezmoi coreutils curl diffutils direnv eksctl fd findutils fzf git-workspace gitbatch go-jsonnet gopass jq yq just k9s kubectl kustomize make nnn ripgrep rsync skopeo stern
+  brew install -q terraform wget iterm2 tig kubecolor glab saml2aws pwgen rclone
 
 
-  echo -e "\n\n"
+  echo    "\n\n"
   echo    "Up to you to install additional tools:"
   echo    "brew install -y ansible ansible-lint aws-iam-authenticator azure-cli"
+  echo    "gcloud components install gke-gcloud-auth-plugin"
 
   {{ if .features.gnutools }}
   ## GNU first class experience
@@ -33,6 +33,16 @@
   fisher install jethrokuan/fzf
   fisher install jethrokuan/z
   {{ end }}
+
+   # fonts
+   brew install font-source-code-pro font-jetbrains-mono-nerd-font font-0xproto-nerd-font fontconfig
+   starship preset nerd-font-symbols -o ~/.config/starship.toml
+
+   # starship
+   brew install starship
+   #starship preset plain-text-symbols -o ~/.config/starship.toml
+
+   # OTHER
 
 
 ## LINUX

@@ -1,7 +1,7 @@
 
 # RC
 function source_rc
- touch $argv && source $argv
+    for i in $argv; touch $i && source $i; end
 end
 
 if status --is-interactive
