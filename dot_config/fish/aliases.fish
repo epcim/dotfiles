@@ -27,8 +27,7 @@ alias gh 'git log --pretty=tformat:%H |xargs -n1 git show'
 # k8s
 alias stern "stern -s1m -n (default "kube-system" "$KUBE_NS")"
 alias kluctl 'kluctl --no-update-check'
-which kubecolor &>/dev/null && 
-  alias kubectl "kubecolor" || true
+which kubecolor &>/dev/null && alias kubectl "kubecolor" || true
 alias k 'kubectl'
 alias kg 'k get pods -A | grep -i'
 alias kp 'k get pods -A'

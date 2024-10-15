@@ -13,6 +13,9 @@ if status --is-interactive
     set CDPATH . ~/Sync ~/Work ~/Workspace
 end
 
+# Ctrl-o will open the selected file/directory in your editor of choice.
+set fzf_dir_opts --bind "ctrl-o:execute($EDITOR {} &> /dev/tty)"
+
 ## set -g Z_SCRIPT_PATH $HOME/bin/z.sh
 
 set -gx fish_greeting ''
