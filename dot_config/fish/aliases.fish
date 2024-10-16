@@ -4,7 +4,7 @@ alias df 'command df -m'
 alias j jobs
 alias l 'ls -la --color'
 alias ll 'ls -lrta --color'
-alias ls 'command ls -FG'
+#alias ls 'command ls -FG'
 alias lsn 'stat -c "%a %n" '
 alias su 'command su -m'
 alias map 'xargs -n1'

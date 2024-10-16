@@ -1,4 +1,9 @@
 
+["~/.config/nvim.astro"]
+    type = "git-repo"
+    url = "https://github.com/epcim/astronvim_config.git"
+    refreshPeriod = "168h"
+
 # part of brew
 #{{ $ageVersion := "1.1.1" -}}
 #["bin/age"]
@@ -39,17 +44,19 @@
 #    url = "https://github.com/orf/git-workspace/releases/download/v{{ $gitWksVersion }}/git-workspace-{{if eq .chezmoi.os "darwin"}}Darwin{{else}}Linux{{end}}-x86_64.tar.gz"
 #    path = "git-workspace"
 
+# DEPRECATED
 # neovim (lazy, astro)
-["~/.config/nvim.astro/lua/user"]
-    type = "git-repo"
-    url = "https://github.com/epcim/astronvim_config.git"
-    refreshPeriod = "168h"
+# ["~/.config/nvim.astro/lua/user"]
+#     type = "git-repo"
+#     url = "https://github.com/epcim/astronvim_config.git"
+#     refreshPeriod = "168h"
 
-["~/.config/nvim.astro"]
-    type = "archive"
-    url = "https://github.com/AstroNvim/AstroNvim/archive/main.tar.gz"
-    #exact = true
-    stripComponents = 1
-    refreshPeriod = "168h"
-    #include = ["*/*.zsh"]
-    exclude = ["*/.github", "*/lua/user/*"]
+# DEPRECATED
+# ["~/.config/nvim.astro"]
+#     type = "archive"
+#     url = "https://github.com/AstroNvim/AstroNvim/archive/main.tar.gz"
+#     #exact = true
+#     stripComponents = 1
+#     refreshPeriod = "168h"
+#     #include = ["*/*.zsh"]
+#     exclude = ["*/.github", "*/lua/user/*"]
