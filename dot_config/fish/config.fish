@@ -20,7 +20,9 @@ set -gx fish_greeting ''
 # funcsave fish_mode_prompt
 # function prompt_login; end
 
-set fish_function_path ~/.config/fish/functions/*/ $fish_function_path
+set fish_function_path \
+  ~/.config/fish/functions/* \
+  $fish_function_path
 
 set -gx GPG_TTY $(tty)
 
