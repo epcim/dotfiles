@@ -20,6 +20,8 @@ set -gx fish_greeting ''
 # funcsave fish_mode_prompt
 # function prompt_login; end
 
+set -gx GPG_TTY $(tty)
+
 if which nvim 2>/dev/null
    function vim
        EDITOR=nvim chezmoi edit --watch "$argv[1]" 2>/dev/null || nvim "$argv[1]"

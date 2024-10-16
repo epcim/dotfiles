@@ -24,7 +24,7 @@ alias kp 'k get pods -A'
 alias kq 'k get quota'
 alias ke 'k get events --sort-by=".lastTimestamp"'
 alias kgp 'k get pods -A'
-alias k9s 'nocorrect k9s --refresh 30 -n all'
+alias k9s 'k9s --refresh 30 -n all'
 
 
 
