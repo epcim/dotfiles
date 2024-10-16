@@ -24,7 +24,7 @@ set -gx GPG_TTY $(tty)
 
 if which nvim 2>/dev/null
    function vim
-       EDITOR=nvim chezmoi edit --watch "$argv[1]" 2>/dev/null || nvim "$argv[1]"
+       EDITOR=nvim chezmoi edit --watch "$argv[1]" 2>/dev/null || nvim $argv
    end
 end
 
