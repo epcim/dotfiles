@@ -4,8 +4,10 @@
 {{- if eq .chezmoi.os "darwin" }}
 
   ## common utils
-  brew install -q awscli bash bat chezmoi coreutils curl diffutils direnv eksctl fd findutils fzf git-workspace gitbatch go-jsonnet gopass jq yq just k9s kubectl kustomize make nnn ripgrep rsync skopeo stern
-  brew install -q terraform wget iterm2 tig kubecolor glab saml2aws pwgen rclone
+  ## common, serverside minimum
+  brew install -q bash bat chezmoi coreutils curl diffutils direnv fd findutils fzf jq yq just nnn ripgrep rsync tree wget kubectl stern
+  ## users
+  brew install -q terraform iterm2 tig kubecolor glab saml2aws pwgen rclone k9s kustomize make go-jsonnet gopass skopeo stern awscli eksctl git-workspace gitbatch
 
 
   echo    "\n\n"
