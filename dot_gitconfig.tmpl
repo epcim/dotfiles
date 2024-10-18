@@ -80,9 +80,8 @@
 [diff "sopsdiffer"]
   textconv = sops -d
 
-[includeIf "file:~/.gitconfig.local"]
+[includeIf "file:~/"]
   path = ~/.gitconfig.local
 
-[includeIf "file:~/.gitconfig.f5"]
+[includeIf "gitdir:~/Work/"]
   path = ~/.gitconfig.f5
-
