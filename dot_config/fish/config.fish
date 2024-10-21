@@ -7,7 +7,7 @@ end
 
 if status --is-interactive
     set -l U (string replace "." "" $USER)
-    #source_rc ~/.config/fish/aliases.fish
+    source_rc ~/.config/fish/aliases.fish
     #source_rc ~/.config/fish/config.{$U,local}.fish
 end
 
