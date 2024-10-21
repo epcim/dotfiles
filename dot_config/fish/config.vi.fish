@@ -8,8 +8,8 @@ function fish_user_key_bindings
     bind \ep prepend-paste
     bind \ev prepend-vim
     bind \ey 'commandline -b | pbcopy'
-    #bind \e'>' 'commandline -a -- "| shiftr"'
-    #bind \e'<' 'commandline -a -- "| shiftl"'
+    bind \e'>' 'commandline -a -- "| shiftr"'
+    bind \e'<' 'commandline -a -- "| shiftl"'
     #bind \es 'git st'
     #bind \ed 'git di'
     #bind \ex 'git x'
@@ -19,7 +19,7 @@ function fish_user_key_bindings
 
 end
 
-if which nvim > /dev/null
+if which nvim &> /dev/null
     set -gx EDITOR nvim
     alias vimdiff 'nvim -d'
     alias vim 'nvim'

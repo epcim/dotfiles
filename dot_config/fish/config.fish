@@ -10,7 +10,7 @@ if status --is-interactive
     source_rc ~/.config/fish/aliases.fish
     source_rc ~/.config/fish/config.{$U,local}.fish
 
-    which direnv &>/dev/null && direnv hook fish | source  || true
+    #which direnv &>/dev/null && direnv hook fish | source  || true
     which starship &>/dev/null && starship init fish | source  || true
 end
 
@@ -30,7 +30,7 @@ set fish_function_path \
 
 set -gx GPG_TTY $(tty)
 
-if which nvim 2>/dev/null
+if which nvim &>/dev/null
    function vim
        EDITOR=nvim chezmoi edit --watch "$argv[1]" 2>/dev/null || nvim $argv
    end
