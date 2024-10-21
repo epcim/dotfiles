@@ -5,11 +5,7 @@ function source_rc
 end
 
 if status --is-interactive
-    source_rc ~/.config/fish/config.{vi,f5}.fish
-
-    which direnv &>/dev/null && direnv hook fish | source  || true
-    which starship &>/dev/null && starship init fish | source  || true
-
+    source_rc ~/.config/fish/config.vi.fish
     set CDPATH . ~/Sync ~/Work ~/Workspace
 end
 

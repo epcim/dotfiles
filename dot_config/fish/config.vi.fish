@@ -1,4 +1,3 @@
-
 alias vim-norc 'vim -u NORC'
 alias vim-none 'vim -u NONE'
 

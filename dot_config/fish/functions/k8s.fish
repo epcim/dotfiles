@@ -1,9 +1,8 @@
 
 
 # k8s
-alias stern 'stern -s1m'
-alias kluctl 'kluctl --no-update-check'
 which kubecolor &>/dev/null && alias kubectl "kubecolor" || true
+alias kluctl 'kluctl --no-update-check'
 alias k 'kubectl'
 alias kg 'k get pods -A | grep -i'
 alias kp 'k get pods -A'
