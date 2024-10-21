@@ -8,11 +8,15 @@ function fish_user_key_bindings
     bind \ep prepend-paste
     bind \ev prepend-vim
     bind \ey 'commandline -b | pbcopy'
-    bind \e'>' 'commandline -a -- "| shiftr"'
-    bind \e'<' 'commandline -a -- "| shiftl"'
-    bind \es 'git st'
-    bind \ed 'git di'
-    bind \ex 'git x'
+    #bind \e'>' 'commandline -a -- "| shiftr"'
+    #bind \e'<' 'commandline -a -- "| shiftl"'
+    #bind \es 'git st'
+    #bind \ed 'git di'
+    #bind \ex 'git x'
+
+    #bind \cleft backward-word
+    #bind \cright forward-word
+
 end
 
 if which nvim > /dev/null
