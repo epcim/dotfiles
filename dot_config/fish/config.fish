@@ -1,4 +1,5 @@
 
+
 # RC
 function source_rc
     for i in $argv; touch $i && source $i; end
@@ -6,8 +7,8 @@ end
 
 if status --is-interactive
     set -l U (string replace "." "" $USER)
-    source_rc ~/.config/fish/aliases.fish
-    source_rc ~/.config/fish/config.{$U,local}.fish
+    #source_rc ~/.config/fish/aliases.fish
+    #source_rc ~/.config/fish/config.{$U,local}.fish
 end
 
 if status --is-login
