@@ -1,7 +1,7 @@
 
-["~/.config/nvim.astro"]
+[".config/nvim.astro"]
     type = "git-repo"
-    url = "https://github.com/epcim/astronvim_config.git"
+    url = "git@github.com:epcim/astronvim_config.git"
     refreshPeriod = "168h"
 
 # part of brew
