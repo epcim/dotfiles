@@ -6,15 +6,46 @@
 * Can coexist with your existing chezmoi installation
 
 
-
 ## Init
 
+Prereq, with alternative destinations (run these first):
+```sh
+
+#NOTE: ONLY IF YOU DONT HAVE INSTALLED IT YET
+cd $HOME
+git clone https://github.com/Homebrew/brew homebrew
+curl -L https://github.com/Homebrew/brew/tarball/master | tar xz --strip 1 -C homebrew
+export PATH=$HOME/homebrew/bin:$PATH
+# ^^
+#NOTE: you will need to configure your `HOMEBREW_PREFIX` if it diverts from `~/homebrew` or `/opt/homebrew`
+#The best practice: `HOMEBREW_PREFIX=~/homebrew`, one or other can exist, see `.config/fish/config.f5.fish`
+
+# Install minimum & dotfiles tools
+export HOMEBREW_CASK_OPTS="--appdir=~/Applications"
 ```
+
+Prereq, otherwise:
+```sh
+xcode-select --install
+brew install -q \
+    jq yq curl wget coreutils diffutils findutils gawk gnu-sed gnu-tar rsync make just age chezmoi nnn
+
+#NOTE: ONLY IF YOU USE IT FROM DAY ONE(takes more time)
+brew install -q gopass
+```
+
+
+Init dotfiles:
+```sh
 chezmoi init --exclude encrypted \
   --ssh --guess-repo-url=false \
   -C ~/.config/chezmoi/chezmoi.toml \
   git@git.apealive.net:epcim/dotfiles.git
+
+  chezf5 apply -v
 ```
+
+> Note: the working directory for chezmoi is ~/.config/chezmoi
 
 ### Overlays
 
@@ -34,15 +65,30 @@ chez$FLAVOR \
   git@git.apealive.net:epcim/dotfiles-$FLAVOR.git
 ```
 
-## Usage
+## How it works & Usage
+
+This repo will deliver the bestpractice dotfiles. It's up to you to use them.
+
+> we dont intend to change your current setup and dont clash with default user configuration
+> if feasible we deliver ex: `.zshrc.$FLAVOR` or `.gitconfig.$FLAVOR`.
+
+To hook f5 configuration and profiles in your existing dotfiles files.
+Load them your own way, for example in your `~/.zshrc, ~/.bashrc`:
+```sh
+source $HOME/.profile
+source $HOME/.zshrc.$FLAVOR
+```
+
+
+## Daily operations
 
 See docs:
 * https://www.chezmoi.io/user-guide/daily-operations/
 
 TL;DR;
 
-to update from upstream:
-```
+```sh
+# update
 chezmoi diff
 chezmoi apply -v 
 
@@ -52,23 +98,26 @@ chezmoi update
 # to run install scripts
 RUN_AFTER=utils chezmoi apply
 
-```
-
-to track new dotfiles:
-```
-# to update your dotfiles with the shared configuratio:
-chezmoi git pull -- --autostash --rebase && chezmoi diff  
-chezmoi apply -v --dry-run
-chezmoi apply
-
 # add files
-chezmoi add --follow ~/.zshrc.$HOSTAME
+chezmoi add --follow ~/.zshrc.$HOSTNAME
 chezmoi add --follow --template ~/.bashrc.$HOSTNAME
-chezmoi add --follow --encrypt ~/.secretFile
 
 # edit/commit/diff
-chezmoi edit ~/.zshrc
+vim ~/.config/fish/config.fish # will auto-trigger an alias with chezmoi edit as below
+chezmoi edit ~/.gitconfig.$HOSTNAME
+chezmoi edit --watch ~/.config/fish/config.$HOSTNAME.fish
 chezmoi git status/add/commit
+
+
+# to update your dotfiles with the shared configuration:
+chezmoi git pull -- --autostash --rebase && chezmoi diff
+chezmoi apply -v --dry-run --exclude=scripts
+chezmoi apply --exclude=scripts
+chezmoi apply
+
+
+# diff diverted files manually
+chezf5 diff  | grep 'diff --git' | sed -e 's,a/,~/,' -e 's,b/\.,dot_,' -e 's,b/,,' -e 's,diff --git,vimdiff,'
 ```
 
 
@@ -77,11 +126,12 @@ chezmoi git status/add/commit
 - https://www.chezmoi.io/user-guide
 - https://www.chezmoi.io/reference
 - https://www.chezmoi.io/reference/special-files-and-directories
+- https://www.chezmoi.io/links/related-software/
 
 
 ## Resources delivered
 
-* see ~/.cofig/chezmoi/chezmoi.toml (data.features, data.install)
+* see .chezmoi.toml (data.features)
 * shell and common cli configuration
 * sre common utilities
 
@@ -120,25 +170,9 @@ On OSX, to use deployment model scripts, ie: ("make render")
 
 #### recomended cli tools
 
-Subject of `./run_after_utils.sh.tmpl` config script (in this repo).
+Subject of `./.run_onchange_utils.sh.toml` config script (in this repo).
+Mind it will either rename & link all GNU binnaries with common name (without "g" prefix) on your `~/bin`.
 
-```
-brew install \
-    jq yq stern gitbatch gopass curl wget bat direnv jsonnet
-	terraform skopeo kustomize kubectl stern k9s eksctl \
-    azure-cli awscli aws-iam-authenticator google-cloud-sdk \
-    ansible ansible-lint
-```
-
-Link all GNU binnaries with common name (without "g" prefix) on your path:
-```
-  test -e ~/bin || mkdir ~/bin
-  for i in $(ls /usr/local/bin/g*); do
-      N=$(basename ${i/g//})
-      ln -sf $i ~/bin/$N
-  done
-  export PATH="$HOME/bin:$PATH"
-```
 
 
 #### k8s utils
@@ -150,24 +184,24 @@ kubectl krew install rolesum
 kubectl krew install np-viewer
 kubectl krew install ksniff
 kubectl krew install view-serviceaccount-kubeconfig
+```
 
 # ci & build
+```
 brew install \
-	cmake make autoconf automake
-    just
+	cmake make autoconf automake just
 
 ```
 
+#### neovim, AstroVim
 
-#### neovim dependencies
+Dependencies: https://docs.astronvim.com/
+
 ```
 brew install \
 	fd \
 	ripgrep \
 	lazygit
-
-curl https://raw.githubusercontent.com/rupa/z/master/z.sh -o ~/bin/z.sh
-chmod u+x ~/bin/z.sh
 ```
 
 ### OSX Fonts
@@ -176,13 +210,30 @@ chmod u+x ~/bin/z.sh
 
 #### nerd fonts
 ```
-brew tap homebrew/cask-fonts &&
-	brew install --cask font-hack-nerd-font
+brew tap homebrew/cask-fonts
 
+brew install font-hack-nerd-font
 brew install font-source-code-pro
 
 # nerd fonts (all)
 brew search nerd-font | grep font | xargs -n1 brew install
+```
+
+### Starhip configuration
+
+
+```
+starship preset tokyo-night -o ~/.config/starship.toml
+starship preset plain-text-symbols -o ~/.config/starship.toml
+```
+
+### iTerm2
+
+```
+Go to the Iterm settings -> Profiles -> Text
+
+* hack-nerd-font
+* jetbrains-mono-nerd-font
 ```
 
 ### OSX Setup
