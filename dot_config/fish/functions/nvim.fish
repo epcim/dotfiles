@@ -7,10 +7,10 @@ function vim
 end
 
 function vi
-  vim
+  vim $argv
 end
 
 function vimdiff
-  nvim -d
+  nvim -d $argv
 end
 
