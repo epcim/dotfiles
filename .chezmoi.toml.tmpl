@@ -43,3 +43,5 @@ encryption = {{ $eneng | quote }}
     command = "nvim"
     args = ["-d", "{{ $el }} .Destination {{ $er }}", "{{ $el }} .Source {{ $er }}"]
 
+[diff]
+  exclude = ["scripts"]
