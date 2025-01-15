@@ -9,3 +9,10 @@ age.key
 #.bashrc.*
 #.fishrc.*
 
+# repositories
+Work/gitlab*/***
+Work/github*/**
+Work/gittea*/**
+Workspace/gitlab*/***
+Workspace/github*/**
+Workspace/gittea*/**

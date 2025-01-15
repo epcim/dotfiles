@@ -18,6 +18,8 @@
   minimal  = {{ contains "min" $featu }}  # Minimal isntallation, for servers
   gnutools = {{ contains "gnu" $featu }}  # OSX GNU tools installed to ~/bin
   vimuser  = {{ contains "vim" $featu }}  # Vim user experience, everywheere
+  gnutools = true     # Provide GNU tools by symlinking into ~/bin
+  gitRepos = false
 
 [data.install]
   #age = {{ eq $eneng "age" }}
