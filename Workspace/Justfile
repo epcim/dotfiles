@@ -1,0 +1,31 @@
+set export := true
+set dotenv-load := true
+set positional-arguments
+
+GITLAB_TOKEN := env("GITLAB_TOKEN", "")
+GIT_WORKSPACE := env("PWD", "./")
+GIT_WORKSPACE_BIN := "git-workspace"
+
+AUTO_PULL := ""
+
+# git-workspace update & fetch & pull {{AUTO_PULL}} dirs
+sync:
+  #!/bin/sh
+
+  [[ -n $GITLAB_TOKEN ]] || \
+    if gopass ls me/svc/gitlab/token 2>/dev/null; then 
+      export GITLAB_TOKEN=$(gopass -o f5/svc/gitlab/token)
+    fi
+    if gopass ls me/svc/github/token 2>/dev/null; then 
+      export GITHUB_TOKEN=$(gopass -o me/svc/github/token)
+    fi
+
+  ${GIT_WORKSPACE_BIN} update &&\
+  ${GIT_WORKSPACE_BIN} fetch  && just pull {{AUTO_PULL}} 
+
+
+# gitbatch pull directories
+pull *dirs="":
+  for PULL in {{dirs}}; do \
+    gitbatch --recursive-depth=0 --mode=pull --directory=$PULL -q; \
+  done
