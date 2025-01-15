@@ -18,11 +18,9 @@
   minimal  = {{ contains "min" $featu }}  # Minimal isntallation, for servers
   gnutools = {{ contains "gnu" $featu }}  # OSX GNU tools installed to ~/bin
   vimuser  = {{ contains "vim" $featu }}  # Vim user experience, everywheere
-  gnutools = true     # Provide GNU tools by symlinking into ~/bin
-  gitRepos = false
+  gitRepos = true
 
 [data.install]
-  #age = {{ eq $eneng "age" }}
   gopass = true
   kitty = false
 
@@ -38,6 +36,8 @@ encryption = {{ $eneng | quote }}
     autoCommit = true
     #autoPush = true
     commitMessageTemplate = {{ `"{{ promptString \"Commit message\" }}"` }}
+
+
 
 {{ $el :=  "{{"  }}
 {{ $er :=  "}}"  }}

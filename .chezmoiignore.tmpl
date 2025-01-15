@@ -1,0 +1,16 @@
+README.md
+scripts/
+backups/   # ignore the backups folder, but not its contents
+backups/** # ignore the contents of backups folder but not the folder itself
+age.key
+
+
+# repositories
+{{ if not .features.gitRepos }}
+Work/gitlab*/***
+Work/github*/**
+Work/gittea*/**
+Workspace/gitlab*/***
+Workspace/github*/**
+Workspace/gittea*/**
+{{ end }}
