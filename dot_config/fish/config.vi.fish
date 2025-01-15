@@ -19,9 +19,9 @@ function fish_user_key_bindings
 
 end
 
-if which nvim &> /dev/null
-    set -gx EDITOR nvim
-    alias vimdiff 'nvim -d'
-    alias vim 'nvim'
-end
-
+# if which nvim &> /dev/null
+#     set -gx EDITOR nvim
+#     alias vimdiff 'nvim -d'
+#     alias vim 'nvim'
+# end
+#

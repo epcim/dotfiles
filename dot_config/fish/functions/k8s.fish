@@ -8,6 +8,6 @@ alias kg 'k get pods -A | grep -i'
 alias kp 'k get pods -A'
 alias kq 'k get quota'
 alias ke 'k get events --sort-by=".lastTimestamp"'
-alias k9s 'k9s --refresh 30 -n all'
+alias k9s 'k9s -n all'
 
 function kgp; kubectl get pods -A -o wide $argv; end

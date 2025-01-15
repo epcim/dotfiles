@@ -11,7 +11,7 @@ alias gh='git log --pretty=tformat:%H |xargs -n1 git show'
 # k8s
 alias stern="stern -s5m -n ${KUBE_NS:-${NAMESPACE:-ves-system}} $@"
 alias kluctl='${KLUCTL:-kluctl} --no-update-check'
-alias k9s='nocorrect k9s --refresh 30 -n all'
+alias k9s='nocorrect k9s -n all'
 # alias kubectl='nocorrect kubectl'
 # kubecltl alias that remember last namespace used
 which kubecolor 2>/dev/null &&\
